@@ -24,15 +24,17 @@
     </div>
     <div class="contenidoLogin">
       <h2>Iniciar Sesión</h2>
-      <form>
+      <form method="post">
+
         <div class="form-group">
           <label for="nombreUsuario">Usuario</label>
-          <input type="text" class="form-control" id="nombreUsuario" placeholder="Ingresar nombre de usuario">
+          <input type="text" class="form-control" id="nombreUsuario" placeholder="Ingresar nombre de usuario" required>
         </div>
         <div class="form-group">
           <label for="password">Contraseña</label>
-          <input type="password" class="form-control" id="password" placeholder="Ingresar contraseña">
+          <input type="password" class="form-control" id="password" placeholder="Ingresar contraseña" required>
         </div>
+
         <div class="form-group d-flex justify-content-between align-items-center">
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="Recordarme">
@@ -40,7 +42,9 @@
           </div>
           <a href="#" class="text-secondary">¿Olvidaste tu contraseña?</a>
         </div>
-        <button type="submit" class="diseñoBoton">INGRESAR</button>
+        
+        <button id="regBtn" type="button" class="diseñoBoton" > INGRESAR</button>
+  
         <div class="form-group text-center mt-3">
           <p>No tienes cuenta? <a href="#" class="text-primary">Crear cuenta</a></p>
         </div>
