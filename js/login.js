@@ -1,5 +1,5 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+    /*Para que no haya campos vacios al apretar el boton */
     let boton = document.getElementById("regBtn");
     boton.addEventListener("click", function () {  //al hacer click 
         let usuario=document.getElementById("nombreUsuario");
@@ -7,9 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (usuario.value=="" || contraseña.value==""){
             alert("Hay campos sin llenar");
         }else{
+            localStorage.setItem('authenticated', 'true'); /*desafíate*/
             location.replace("index.html");
+            /*redirecciona*/
             
+        
         }
     })
 })
-
+  
