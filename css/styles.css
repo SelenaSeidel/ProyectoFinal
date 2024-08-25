@@ -197,7 +197,7 @@ a.custom-card:hover {
   width: 100%;
   margin: auto;
   padding: 2.5rem;
-  background-color: #f8f9fa;  
+  background-color: #f8f9fa;
   border-radius: 8px;
 }
 
@@ -209,15 +209,15 @@ a.custom-card:hover {
 }
 
 .imagenLogin img {
-  max-width: 155%; 
+  max-width: 155%;
   height: auto;
   max-height: 600px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 38px; 
-  font-size: 28px; 
+  margin-bottom: 38px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -229,7 +229,7 @@ h2 {
   padding: 0.75rem;
   font-size: 18px;
   border-radius: 5px;
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 .diseñoBoton:hover {
@@ -242,7 +242,7 @@ h2 {
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
-  min-height: 100vh; 
+  min-height: 100vh;
   margin: auto;
   padding: 0 15px;
 }
@@ -256,13 +256,90 @@ h2 {
   margin: 2%;
 }
 
-.searchbar{
+.searchbar {
   text-align: center;
   padding: 5px 16px;
   text-decoration: none;
   font-size: 12px;
 }
 
-body{
+body {
   background-color: #f8f9fa;
+}
+
+#products-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.swiper-container {
+  margin-top: 50px;
+  width: 800px;
+  height: 400px;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #007aff;
+  border-radius: 10px;
+  border-radius: 20px;
+}
+
+.swiper-slide img {
+  width: 650px;
+  height: inherit;
+  border-radius: inherit;
+}
+
+.swiper-slide .swiper-slide-caption {
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 20px 20px;
+  text-align: center;
+  width: 650px;
+  background-color: #00000042;
+}
+
+.swiper-pagination {
+  position: relative;
+  margin-top: 50px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #888;
+  opacity: 1;
+  border-radius: 50%;
+  margin: 0 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #333; /* Color del punto activo */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #888;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: bold;
 }
