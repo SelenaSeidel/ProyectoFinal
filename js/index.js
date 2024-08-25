@@ -20,4 +20,11 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
+    let boton = document.getElementById("SalirBtn")
+    boton.addEventListener("click", function () {  //al hacer click 
+        localStorage.setItem('authenticated', 'false');
+        window.location.href = 'login.html';
+
+    })
 });
