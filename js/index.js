@@ -1,4 +1,15 @@
+function checkAuthentication() {
+    // Comprobar si el usuario está autenticado
+    if (localStorage.getItem('authenticated') !== 'true') {
+        window.location.href = 'login.html'; // Redirigir a la página de login si no está autenticado
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", function(){
+    checkAuthentication();
+
+
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
@@ -11,4 +22,20 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
+
+    let boton = document.getElementById("SalirBtn")
+    boton.addEventListener("click", function () {  //al hacer click
+        localStorage.setItem('authenticated', 'false');
+        window.location.href = 'login.html';
+
+
+    })
+
+
+    // Agregamos el código para mostrar el nombre del usuario
+  const username = localStorage.getItem('username');
+  if (username) {
+    document.getElementById('userName').innerText = `Bienvenido, ${username}!`;
+  }
 });
