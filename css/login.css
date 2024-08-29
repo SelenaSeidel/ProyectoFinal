@@ -1,3 +1,4 @@
+/*celular*/
 @media (max-width: 320px){
     .imagenLogin {   /*no mostrar imagen*/
         display: none;    
@@ -31,10 +32,39 @@
     }
 }
 
-
-@media (max-width: 768px, min-width: 320px){
-       .imagenLogin{
-        
-       }
+/*tablet*/
+@media (max-width: 768px){
+    .img-fluid{ 
+        margin-left: -100vw;
+        overflow: hidden;
+    } 
+    .imagenLogin{
+        padding-top: 10%;
+        margin-left: 100vw;
+        margin-right: 85vw;
+        margin-bottom: -2vh;
+        overflow: hidden;
+    }
+    .contenedorPrincipal{
+        display: flex;
+        flex-direction: column; 
+    }
+    body{
+        font-size: large;
+    }
+    #regBtn{      /*ajustar boton*/
+        border: none;
+        margin-top: 7%;
+    }
+    
+    h2{
+        font-size: 4vh;
+    }
+    form>div{/*separar campos*/
+        padding-bottom: 1vh;
+    }
+    .form-control{/*agrandar campos de texto*/
+        padding: 3.5%;
+        font-size: 2vh;
+    }  
 }
-
