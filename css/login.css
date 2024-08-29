@@ -1,0 +1,40 @@
+@media (max-width: 320px){
+    .imagenLogin {   /*no mostrar imagen*/
+        display: none;    
+    }
+    .contenidoLogin{
+        padding: 0% 10% 2%;
+    }
+    h2{
+        padding: 10% 15% 2%;
+    }
+    body{
+        font-size: small;
+    }
+    .box{  /*para checkbox y olvidaste contraseña*/
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .box>div{  
+         margin-bottom: 5%;
+        }
+    .form-check{
+        align-content: left;
+    }
+    #regBtn{      /*ajustar boton*/
+        border: none;
+        font-size: medium;
+        width: fit-content;
+    }
+    div.center{    /*centrar boton*/
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 768px, min-width: 320px){
+       .imagenLogin{
+        
+       }
+}
+
