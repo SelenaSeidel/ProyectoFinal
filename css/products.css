@@ -2,7 +2,6 @@
   margin-top: 50px;
   width: 800px;
   height: 400px;
-  overflow: hidden;
   max-width: 1200px;
 }
 
@@ -72,6 +71,21 @@
   font-weight: bold;
 }
 
+@media (max-width:972px) {
+    .swiper-container {
+        margin-top: 50px;
+        width: 800px;
+        height: 400px;
+        max-width: 1200px;
+        overflow: hidden;
+      }
+}
 
-
-
+@media (max-width: 535px) {
+ 
+   p {
+    font-size:xx-small;
+   }
+  
+    
+}
