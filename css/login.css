@@ -35,7 +35,6 @@
         text-align: center;
     }
     footer{
-        margin-top: -20%;
         font-size: 1.5vh;
     }
 }
@@ -56,9 +55,11 @@
     .contenedorPrincipal{
         display: flex;
         flex-direction: column; 
+        overflow: hidden
     }
     body{
         font-size: large;
+        overflow: hidden;
     }
     #regBtn{      /*ajustar boton*/
         border: none;
@@ -76,7 +77,6 @@
         font-size: 2vh;
     }  
     footer{
-        margin-top: -20%;
         font-size: 1.5vh;
     }
 }
