@@ -1,13 +1,13 @@
 /*celular*/
-@media (max-width: 320px){
+@media (max-width: 375px){
     .imagenLogin {   /*no mostrar imagen*/
         display: none;    
     }
     .contenidoLogin{
-        padding: 0% 10% 2%;
+        padding: 0% 10% 0%;
     }
     h2{
-        padding: 10% 15% 2%;
+        padding: 2% 15% 2%;
     }
     body{
         font-size: small;
@@ -27,8 +27,16 @@
         font-size: medium;
         width: fit-content;
     }
+    .form-control{/*agrandar campos de texto*/
+        padding: 3.5%;
+        font-size: 2vh;
+    }  
     div.center{    /*centrar boton*/
         text-align: center;
+    }
+    footer{
+        margin-top: -20%;
+        font-size: 1.5vh;
     }
 }
 
@@ -67,4 +75,8 @@
         padding: 3.5%;
         font-size: 2vh;
     }  
+    footer{
+        margin-top: -5%;
+        font-size: 1.5vh;
+    }
 }
