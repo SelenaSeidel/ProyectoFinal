@@ -39,3 +39,9 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+  let userName = localStorage.getItem('username');
+  if (userName) {
+    document.getElementById("userName").textContent = `Bienvenido, ${userName}`;
+  }
+});

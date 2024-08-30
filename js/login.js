@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem('authenticated', 'true'); /*desafíate*/
             location.replace("index.html");
             /*redirecciona*/
-           
-       
         }
     })
 })

@@ -25,10 +25,4 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem('authenticated', 'false');
         window.location.href = 'login.html';
     })
-
-    // Agregamos el código para mostrar el nombre del usuario
-  const username = localStorage.getItem('username');
-  if (username) {
-    document.getElementById('userName').innerText = `Bienvenido, ${username}!`;
-  }
 });
