@@ -3,10 +3,10 @@
     .imagenLogin {   /*no mostrar imagen*/
         display: none;    
     }
-    .contenidoLogin{
+    .contenidoLogin{ /*separación y ubicación*/
         padding: 0% 10% 0%;
     }
-    h2{
+    h2{/*separación y ubicación*/
         padding: 2% 15% 2%;
     }
     body{
@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column-reverse;
     }
-    .box>div{  
+    .box>div{  /*separar recordar y contra*/
          margin-bottom: 5%;
         }
     .form-check{
@@ -52,7 +52,7 @@
         margin-bottom: -2vh;
         overflow: hidden;
     }
-    .contenedorPrincipal{
+    .contenedorPrincipal{ /*para que imagen se vea arriba*/
         display: flex;
         flex-direction: column; 
         overflow: hidden
