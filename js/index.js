@@ -4,7 +4,6 @@ function checkAuthentication() {
         window.location.href = 'login.html'; // Redirigir a la página de login si no está autenticado
     }
 }
-
 document.addEventListener("DOMContentLoaded", function(){
     checkAuthentication();
 
@@ -22,9 +21,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     let boton = document.getElementById("SalirBtn")
-    boton.addEventListener("click", function () {  //al hacer click 
+    boton.addEventListener("click", function () {  //al hacer click
         localStorage.setItem('authenticated', 'false');
         window.location.href = 'login.html';
-
     })
 });
