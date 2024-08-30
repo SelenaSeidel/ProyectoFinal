@@ -20,26 +20,29 @@ function renderProducts(products) {
   });
 
   new Swiper('.swiper-container', {
-      effect: 'coverflow',
-      slidesPerView: 2,
-      centeredSlides: true,
-      initialSlide: 2,
-      coverflowEffect: {
-          rotate: 0,
-          stretch: 200,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-      },
-      pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-      },
-      navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-      },
+    effect: 'coverflow',
+    slidesPerView: 2,
+    centeredSlides: true,
+    initialSlide: 2,
+    coverflowEffect: {
+        rotate: 0,
+        stretch: 200,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+    },
+   
+    
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
   });
+  
 }
 
 document.addEventListener('DOMContentLoaded', () => {
