@@ -45,8 +45,11 @@ function renderProducts(products) {
   
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-  .then(response => response.json())
-  .then(productsData => renderProducts(productsData.products));
+document.addEventListener("DOMContentLoaded", () => {
+  const categoryId = localStorage.getItem("catID");
+  fetch(
+    `https://japceibal.github.io/emercado-api/cats_products/${categoryId}.json`
+  )
+    .then((response) => response.json())
+    .then((productsData) => renderProducts(productsData.products));
 });
