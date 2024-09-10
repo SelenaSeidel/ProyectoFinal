@@ -35,13 +35,12 @@ function sortProducts(criteria, array){
     return result;
 }
 
-function setCatID(id) {
-    localStorage.setItem("catID", id);
+function setProductID(id) {
+    localStorage.setItem("productID", id);
     window.location = "product-info.html"
 }
 
-function  showProductsList(){
-
+function showProductsList() {
     let htmlContentToAppend = "";
     for(let i = 0; i < productcurrentProductsArray.length; i++){
         let product = productcurrentProductsArray[i];
@@ -50,15 +49,15 @@ function  showProductsList(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.productCount) <= maxCount))){
 
             htmlContentToAppend += `
-            <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
-                        <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
+                        <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${product.name}</h4>
-                            <small class="text-muted">${product.productCount} artículos</small>
+                            <h4 class="mb-1">${product.name} - ${product.currency} ${product.cost} </h4>
+                            <small class="text-muted">${product.soldCount} artículos</small>
                         </div>
                         <p class="mb-1">${product.description}</p>
                     </div>
@@ -88,10 +87,14 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
+    const categoria = localStorage.getItem("catID")
+    const url = PRODUCTS_URL + categoria + ".json"
+
+
+    getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok"){
-            productcurrentProductsArray = resultObj.data
-             showProductsList()
+            productcurrentProductsArray = resultObj.data.products
+            showProductsList()
             //sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
