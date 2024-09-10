@@ -1,28 +1,29 @@
 function renderProducts(product) {
-    const productList = document.getElementById("carrousel");
-    productList.innerHTML = '';
-    const titulo = document.getElementById("tituloCat"); 
-  
-
-    titulo.innerHTML=`<h3>${product.name}</h3>`
-    for (const image of product.images){
-        const productHTML = `
+  const productList = document.getElementById("carrousel");
+  productList.innerHTML = '';
+  const titulo = document.getElementById("tituloCat");
+  const desc = document.getElementById("Proddesc");
+     
+  titulo.innerHTML=`<h3>${product.category}</h3>`
+  desc.innerHTML=` <p>${product.description}</p>`
+ 
+  for (const image of product.images){
+    const productHTML = `
             <div class="swiper-slide">
                   <img src="${image}" alt="Imagen del ${product.name}">
                   <div class="swiper-slide-caption">
                       <h4>${product.name}</h4>
-                      <p>${product.description}</p>
                       <h5>${product.currency} ${product.cost}</h5>
                       <p>Vendidos: ${product.soldCount}</p>
                   </div>
                 </div>
             </div>
-        `;
+           `;
   
-        productList.innerHTML += productHTML;
-    };
+    productList.innerHTML += productHTML;
+  };
   
-    new Swiper('.swiper-container', {
+  new Swiper('.swiper-container', {
       effect: 'coverflow',
       slidesPerView: 2,
       centeredSlides: true,
@@ -45,15 +46,16 @@ function renderProducts(product) {
         prevEl: '.swiper-button-prev',
       },
     });
-    
-  }
+}
+
   
-  document.addEventListener('DOMContentLoaded', () => {
-    let url=PRODUCT_INFO_URL+localStorage.getItem('productID')+".json"
-    fetch(url)
-    .then(function(resultObj){
-      if (resultObj.status === "ok"){
-          renderProducts(resultObj)
-      }
-  });
-  });
+document.addEventListener("DOMContentLoaded", function(e){
+    let id=localStorage.getItem('productID')
+    let url=PRODUCT_INFO_URL+id+".json"
+   getJSONData(url).then(function(resultObj){
+          if (resultObj.status === "ok"){
+              let producto= resultObj.data
+              renderProducts(producto)
+          }
+      });
+  })
