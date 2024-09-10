@@ -15,6 +15,12 @@ let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
+let boton = document.getElementById("SalirBtn")
+boton.addEventListener("click", function () {  //al hacer click
+    localStorage.setItem('authenticated', 'false');
+    window.location.href = 'login.html';
+})
+
 let getJSONData = function(url){
     let result = {};
     showSpinner();
@@ -38,6 +44,8 @@ let getJSONData = function(url){
         hideSpinner();
         return result;
     });
+
+   
 }
 document.addEventListener("DOMContentLoaded", function () {
   let userName = localStorage.getItem('username');

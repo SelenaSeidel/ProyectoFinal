@@ -1,6 +1,6 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_BY_SOLD_COUNT = "Vendidos.";
 let productcurrentProductsArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
@@ -21,10 +21,10 @@ function sortProducts(criteria, array){
             if ( a.name < b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COUNT){
+    }else if (criteria === ORDER_BY_SOLD_COUNT){
         result = array.sort(function(a, b) {
-            let aCount = parseInt(a.productCount);
-            let bCount = parseInt(b.productCount);
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
 
             if ( aCount > bCount ){ return -1; }
             if ( aCount < bCount ){ return 1; }
@@ -35,30 +35,29 @@ function sortProducts(criteria, array){
     return result;
 }
 
-function setCatID(id) {
-    localStorage.setItem("catID", id);
+function setProductID(id) {
+    localStorage.setItem("productID", id);
     window.location = "product-info.html"
 }
 
-function  showProductsList(){
-
+function showProductsList() {
     let htmlContentToAppend = "";
     for(let i = 0; i < productcurrentProductsArray.length; i++){
         let product = productcurrentProductsArray[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(product.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.productCount) <= maxCount))){
+        if (((minCount == undefined) || (minCount != undefined && parseInt(product.soldCount) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.soldCount) <= maxCount))){
 
             htmlContentToAppend += `
-            <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
-                        <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
+                        <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${product.name}</h4>
-                            <small class="text-muted">${product.productCount} artículos</small>
+                            <h4 class="mb-1">${product.name} - ${product.currency} ${product.cost} </h4>
+                            <small class="text-muted">${product.soldCount} artículos</small>
                         </div>
                         <p class="mb-1">${product.description}</p>
                     </div>
@@ -88,10 +87,14 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
+    const categoria = localStorage.getItem("catID")
+    const url = PRODUCTS_URL + categoria + ".json"
+
+
+    getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok"){
-            productcurrentProductsArray = resultObj.data
-             showProductsList()
+            productcurrentProductsArray = resultObj.data.products
+            showProductsList()
             //sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
@@ -105,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        sortAndShowCategories(ORDER_BY_SOLD_COUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
