@@ -1,11 +1,14 @@
-function renderProducts(products) {
+function renderProducts(product) {
     const productList = document.getElementById("carrousel");
-    productList.innerHTML = ''; 
+    productList.innerHTML = '';
+    const titulo = document.getElementById("tituloCat"); 
   
-    products.forEach(product => {
+
+    titulo.innerHTML=`<h3>${product.name}</h3>`
+    for (const image of product.images){
         const productHTML = `
             <div class="swiper-slide">
-                  <img src="${product.image}" alt="Imagen del ${product.name}">
+                  <img src="${image}" alt="Imagen del ${product.name}">
                   <div class="swiper-slide-caption">
                       <h4>${product.name}</h4>
                       <p>${product.description}</p>
@@ -17,7 +20,7 @@ function renderProducts(products) {
         `;
   
         productList.innerHTML += productHTML;
-    });
+    };
   
     new Swiper('.swiper-container', {
       effect: 'coverflow',
@@ -46,7 +49,11 @@ function renderProducts(products) {
   }
   
   document.addEventListener('DOMContentLoaded', () => {
-    fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-    .then(response => response.json())
-    .then(productsData => renderProducts(productsData.products));
+    let url=PRODUCT_INFO_URL+localStorage.getItem('productID')+".json"
+    fetch(url)
+    .then(function(resultObj){
+      if (resultObj.status === "ok"){
+          renderProducts(resultObj)
+      }
+  });
   });
