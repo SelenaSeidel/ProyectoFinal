@@ -83,6 +83,21 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
      showProductsList();
 }
 
+
+function showCatName(){
+    let subtitulo=document.getElementById("subtitulo");
+    let id=localStorage.getItem('catID')
+    let url=PRODUCTS_URL+id+".json"
+    getJSONData(url).then(function(resultObj){
+          if (resultObj.status === "ok"){
+              let categoria= resultObj.data;
+              subtitulo.innerHTML += ` ${categoria.catName}.`
+          }
+      });
+
+}
+
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -90,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     const categoria = localStorage.getItem("catID")
     const url = PRODUCTS_URL + categoria + ".json"
 
+    showCatName();
 
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok"){
@@ -143,4 +159,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 
          showProductsList();
     });
+
+
 });
