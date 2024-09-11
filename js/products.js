@@ -8,7 +8,6 @@ let minCount = undefined;
 let maxCount = undefined;
 let minPrice = undefined;
 let maxPrice = undefined;
-const titulo = document.getElementById("categoriasProductos");
        
 
 
@@ -117,11 +116,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
         
     });
 
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            currentCategoriesArray = resultObj.data
-        }
-    });
+    getJSONData(CATEGORIES_URL).then(function(resultObj) {
+      if (resultObj.status === "ok") {
+          currentCategoriesArray = resultObj.data;
+          
+          if (currentProductsArray.length > 0) {
+              const categoria = currentCategoriesArray[0];  
+              const titulo = document.getElementById("categoriasProductos");
+  
+              localStorage.setItem('nombreCategoria', categoria.name);
+  
+              titulo.innerHTML = `<h3 class="lead">${categoria.name}</h3>`;
+          }
+      }
+  });
+  
+ 
     
 
 
