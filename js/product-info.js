@@ -4,7 +4,7 @@ function renderProducts(product) {
     const titulo = document.getElementById("tituloCat");
     const desc = document.getElementById("Proddesc");
        
-    titulo.innerHTML=`<h3>${product.name}</h3>`
+    titulo.innerHTML=`<h3>${product.category}</h3>`
     desc.innerHTML=` <p>${product.description}</p>`
    
     for (const image of product.images){
@@ -12,6 +12,7 @@ function renderProducts(product) {
               <div class="swiper-slide">
                     <img src="${image}" alt="Imagen del ${product.name}">
                     <div class="swiper-slide-caption">
+                        <h4>${product.name}</h4>
                         <h5>${product.currency} ${product.cost}</h5>
                         <p>Vendidos: ${product.soldCount}</p>
                     </div>
