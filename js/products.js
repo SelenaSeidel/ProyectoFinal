@@ -3,10 +3,16 @@ const ORDER_BY_PRICE_ASC = "Precio_ASC";
 const ORDER_BY_PRICE_DESC = "Precio_DESC";
 let currentProductsArray = []; // Corregido de 'productcurrentProductsArray'
 let currentSortCriteria = undefined;
+let currentCategoriesArray = [];
 let minCount = undefined;
 let maxCount = undefined;
 let minPrice = undefined;
 let maxPrice = undefined;
+const titulo = document.getElementById("categoriasProductos");
+       
+
+
+
 
 function parseValue(value, type) {
     if (type === 'soldCount') {
@@ -54,6 +60,8 @@ function setProductID(id) {
 
 function showProductsList() {
     let htmlContentToAppend = "";
+
+   
     for (let i = 0; i < currentProductsArray.length; i++) { // Corregido de 'productcurrentProductsArray'
         let product = currentProductsArray[i];
 
@@ -104,8 +112,19 @@ document.addEventListener("DOMContentLoaded", function(e) {
         if (resultObj.status === "ok") {
             currentProductsArray = resultObj.data.products; // Corregido de 'productcurrentProductsArray'
             showProductsList();
+            
+        }
+        
+    });
+
+    getJSONData(CATEGORIES_URL).then(function(resultObj){
+        if (resultObj.status === "ok"){
+            currentCategoriesArray = resultObj.data
         }
     });
+    
+
+
 
     document.getElementById("sortByCount").addEventListener("click", function() { // ID corregido en función al HTML
         sortAndShowCategories(ORDER_BY_SOLD_COUNT);
@@ -147,4 +166,5 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
         showProductsList();
     });
+
 });
