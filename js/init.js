@@ -53,4 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (userName) {
     document.getElementById("userName").textContent = `Bienvenido, ${userName}`;
   }
+
+  let boton = document.getElementById("SalirBtn")
+  boton.addEventListener("click", function () {  //al hacer click
+      localStorage.setItem('authenticated', 'false');
+      window.location.href = 'login.html';
+  })
 });
+
