@@ -207,9 +207,15 @@ document.addEventListener("DOMContentLoaded", function(e){
         console.log(searchTerm);
         console.log(currentProductsArray);
         currentProductsArray=currentProductsArray.filter((product) => { 
-        return product.name.toLowerCase().includes(searchTerm);
+        return product.name.toLowerCase().includes(searchTerm)|| product.description.toLowerCase().includes(searchTerm);
         })
-        showProductsList()     
+        showProductsList()  
+        getJSONData(url).then(function(resultObj){
+            if (resultObj.status === "ok"){
+                currentProductsArray = resultObj.data.products
+            }
+        });
+
     });
 });
        
