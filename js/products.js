@@ -201,5 +201,13 @@ document.addEventListener("DOMContentLoaded", function(e){
          showProductsList();
     });
 
-
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        console.log(searchTerm);
+        console.log(currentProductsArray);
+        currentProductsArray=currentProductsArray.filter((product) => { 
+        return product.name.toLowerCase().includes(searchTerm);
+        })
+        showProductsList()     
+    });
 });
