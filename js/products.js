@@ -1,7 +1,8 @@
 const ORDER_BY_SOLD_COUNT = "Vendidos";
 const ORDER_BY_PRICE_ASC = "Precio_ASC";
 const ORDER_BY_PRICE_DESC = "Precio_DESC";
-let currentProductsArray = []; // Corregido de 'productcurrentProductsArray'
+const searchInput = document.getElementById("searchInput");
+let currentProductsArray = []; 
 let currentSortCriteria = undefined;
 let currentCategoriesArray = [];
 let minCount = undefined;
@@ -61,7 +62,7 @@ function showProductsList() {
     let htmlContentToAppend = "";
 
    
-    for (let i = 0; i < currentProductsArray.length; i++) { // Corregido de 'productcurrentProductsArray'
+    for (let i = 0; i < currentProductsArray.length; i++) { // Corregido de 'currentProductsArray'
         let product = currentProductsArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.soldCount) >= minCount)) &&
@@ -95,10 +96,10 @@ function sortAndShowCategories(sortCriteria, categoriesArray) {
   currentSortCriteria = sortCriteria;
 
   if (categoriesArray != undefined) {
-      currentProductsArray = categoriesArray; // Corregido de 'productcurrentProductsArray'
+      currentProductsArray = categoriesArray; // Corregido de 'currentProductsArray'
   }
 
-  currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray); // Corregido de 'productcurrentProductsArray'
+  currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray); // Corregido de 'currentProductsArray'
 
   showProductsList();
 }
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   getJSONData(url).then(function(resultObj) {
       if (resultObj.status === "ok") {
-          currentProductsArray = resultObj.data.products; // Corregido de 'productcurrentProductsArray'
+          currentProductsArray = resultObj.data.products; // Corregido de 'currentProductsArray'
           showProductsList();
           
       }
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     getJSONData(url).then(function(resultObj){
         if (resultObj.status === "ok"){
-            productcurrentProductsArray = resultObj.data.products
+            currentProductsArray = resultObj.data.products
             showProductsList()
             //sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
         }
@@ -200,7 +201,20 @@ document.addEventListener("DOMContentLoaded", function(e){
       }
          showProductsList();
     });
+});
 
+console.log(searchInput);
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        console.log(searchTerm);
+        console.log(currentProductsArray);
+        currentProductsArray.filter((product) => { 
+        return product.name.toLowerCase().includes(searchTerm);
+
+    })     
+    });
+
+        
     searchInput.addEventListener("input", () => {
         const searchTerm = searchInput.value.toLowerCase();
         console.log(searchTerm);
@@ -211,3 +225,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         showProductsList()     
     });
 });
+
