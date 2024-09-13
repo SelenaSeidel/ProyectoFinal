@@ -145,9 +145,6 @@ function showCatName(){
 
 }
 
-
-
-
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -204,27 +201,18 @@ document.addEventListener("DOMContentLoaded", function(e){
       }
          showProductsList();
     });
+});
 
-    console.log(searchInput);
+console.log(searchInput);
     searchInput.addEventListener("input", () => {
         const searchTerm = searchInput.value.toLowerCase();
         console.log(searchTerm);
         console.log(currentProductsArray);
-        currentProductsArray=currentProductsArray.filter((product) => { 
+        currentProductsArray.filter((product) => { 
         return product.name.toLowerCase().includes(searchTerm);
-        })  
-        showProductsList()
-        //getJSONData(url).then(function(resultObj){
-            //if (resultObj.status === "ok"){
-                //currentProductsArray = resultObj.data.products
-                //showProductsList()
-                
-            //}
-        //});   
-    //});
-});
 
-
+    })     
+    });
 
         
 
