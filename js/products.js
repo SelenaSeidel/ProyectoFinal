@@ -201,20 +201,7 @@ document.addEventListener("DOMContentLoaded", function(e){
       }
          showProductsList();
     });
-});
-
-console.log(searchInput);
-    searchInput.addEventListener("input", () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        console.log(searchTerm);
-        console.log(currentProductsArray);
-        currentProductsArray.filter((product) => { 
-        return product.name.toLowerCase().includes(searchTerm);
-
-    })     
-    });
-
-        
+     
     searchInput.addEventListener("input", () => {
         const searchTerm = searchInput.value.toLowerCase();
         console.log(searchTerm);
@@ -225,4 +212,5 @@ console.log(searchInput);
         showProductsList()     
     });
 });
+       
 
