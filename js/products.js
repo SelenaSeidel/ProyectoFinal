@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 function showCatName(){
     let subtitulo=document.getElementById("subtitulo");
     let id=localStorage.getItem('catID')
-    let url=PRODUCTS_URL+id+".json"
+    let url=PRODUCTS_URL+id+EXT_TYPE;
     getJSONData(url).then(function(resultObj){
           if (resultObj.status === "ok"){
               let categoria= resultObj.data;
@@ -135,7 +135,7 @@ function showCatName(){
 function showCatName(){
     let subtitulo=document.getElementById("subtitulo");
     let id=localStorage.getItem('catID')
-    let url=PRODUCTS_URL+id+".json"
+    let url=PRODUCTS_URL+id+EXT_TYPE
     getJSONData(url).then(function(resultObj){
           if (resultObj.status === "ok"){
               let categoria= resultObj.data;
@@ -150,7 +150,7 @@ function showCatName(){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     const categoria = localStorage.getItem("catID")
-    const url = PRODUCTS_URL + categoria + ".json"
+    const url = PRODUCTS_URL + categoria + EXT_TYPE;
 
     showCatName();
 
@@ -177,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   document.getElementById("clearRangeFilter").addEventListener("click", function() {
       document.getElementById("rangeFilterPriceMin").value = ""; // Se eliminan los campos de cantidad ya que no existen en el HTML
       document.getElementById("rangeFilterPriceMax").value = "";
+      
 
       minPrice = undefined;
       maxPrice = undefined;
