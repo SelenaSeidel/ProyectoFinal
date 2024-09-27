@@ -58,6 +58,10 @@ function renderProducts(product) {
       window.location = "product-info.html";
     }
     relatedProductElement.classList.add("carousel-item")
+    const relatedProductName = document.createElement("h3")
+    relatedProductName.innerHTML = p.name
+    relatedProductElement.appendChild(relatedProductName)
+
     const relatedProductImg = document.createElement("img")
     relatedProductImg.setAttribute('src', p.image)
     relatedProductElement.appendChild(relatedProductImg)
