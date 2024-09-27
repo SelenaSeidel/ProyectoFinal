@@ -47,11 +47,16 @@ function renderProducts(product) {
       },
     });
 
-  
+ 
+
   const relatedProducts = document.querySelector("#related-products .carousel-inner");
  
   product.relatedProducts.forEach((p, i) => {
     const relatedProductElement = document.createElement("div")
+    relatedProductElement.onclick = function(){
+      localStorage.setItem("productID", p.id);
+      window.location = "product-info.html";
+    }
     relatedProductElement.classList.add("carousel-item")
     const relatedProductImg = document.createElement("img")
     relatedProductImg.setAttribute('src', p.image)
