@@ -12,6 +12,8 @@
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/products.css" rel="stylesheet">
     <link href="css/product-info.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,10 +56,66 @@
         </div>
     </div>
     <div id="Proddesc">
-     
+        <!-- Descripción del producto -->
     </div>
-
-
+    
+    <div id="related-products" style="width: 30%; margin: auto;">
+        <h2>Productos relacionados:</h2>
+        <div id="related-products-carousel" class="carousel slide">
+            <div class="carousel-inner">
+                <!-- Aquí van los productos relacionados -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    
+    <div id="comentarios" class="container mt-5 justify-content-center">
+        <h3>Comentarios y calificaciones</h3>
+        <table class="table table-bordered table-rounded">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Usuario</th>
+                    <th scope="col">Comentario</th>
+                    <th class="text-center" scope="col">Calificación</th>
+                </tr>
+            </thead>
+            <tbody id="tablacomentarios"></tbody>
+        </table>
+    </div>
+    
+    <div id="formularioCalificacion" class="container mt-5">
+        <h2>Califica este producto</h2>
+        <div class="mb-3">
+            <label for="userNameDisplay" class="form-label">Usuario:</label>
+            <input type="text" class="form-control" id="userNameDisplay" readonly>
+        </div>
+    
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Comentario:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+        </div>
+    
+        <div class="mb-3">
+            <label for="rating" class="form-label">Calificar:</label>
+            <select class="form-control" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    
+        <button type="button" class="btn btn-primary" id="submitComment">Enviar</button>
+    </div>
+    
     <footer class="text-muted">
         <div class="container">
             <p class="float-end">
@@ -77,9 +135,9 @@
     </div>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/product-info.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
