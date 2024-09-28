@@ -12,7 +12,7 @@
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body> 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -40,21 +40,29 @@
       </div>
     </div>
   </nav>
-  
+  <div class="row">
+    <div class="col text-center">
+       <div data-bs-toggle="buttons">
+        <input type="search" id="searchInput" placeholder="Buscar productos">
+      </div>
+    </div>
+  </div>
+  </div>  
   <main class="pb-5">
     <div class="text-center p-4">
       <h2>Productos</h2>
-      <p class="lead">Verás aquí todos los productos de la categoría elegida.</p>
+      <p id="subtitulo" class="lead">Verás aquí todos los productos de la categoría </p>      
     </div>
     <div class="container">
       <div class="row">
         <div class="col text-end">
-          <input type="radio" class="btn-check" name="options" id="sortByCount" checked> 
-          <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i> Relevancia</label>
+         
           <input type="radio" class="btn-check" name="options" id="sortByPriceAsc"> 
-          <label class="btn btn-light" for="sortByPriceAsc"><i class="fas fa-sort-amount-up mr-1"></i> Precio Ascendente</label>
+          <label class="btn btn-light" for="sortByPriceAsc"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
           <input type="radio" class="btn-check" name="options" id="sortByPriceDesc"> 
-          <label class="btn btn-light" for="sortByPriceDesc"><i class="fas fa-sort-amount-down mr-1"></i> Precio Descendente</label>
+          <label class="btn btn-light" for="sortByPriceDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
+          <input type="radio" class="btn-check" name="options" id="sortByCount" checked> 
+          <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i> Rel.</label>
         </div>
       </div>
       
@@ -62,7 +70,7 @@
         <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
             <div class="col">
-              <p class="font-weight-normal text-end my-2">Precio.</p>
+              <p class="font-weight-normal text-end my-2">Precio</p>
             </div>
             <div class="col">
               <input class="form-control" type="number" placeholder="min." id="rangeFilterPriceMin">
