@@ -7,7 +7,6 @@ function renderProducts(product) {
   const desc = document.getElementById("Proddesc");
      
   titulo.innerHTML=`<h3>${product.category}</h3>`
-  desc.innerHTML=` <p>${product.description}</p>`
  
   for (const image of product.images){
     const productHTML = `
@@ -17,6 +16,7 @@ function renderProducts(product) {
                       <h4>${product.name}</h4>
                       <h5>${product.currency} ${product.cost}</h5>
                       <p>Vendidos: ${product.soldCount}</p>
+                      <p>${product.description}</p>
                   </div>
                 </div>
             </div>
@@ -47,20 +47,33 @@ function renderProducts(product) {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-    });
+  });
+
+  const relatedProducts = document.querySelector("#related-products .carousel-inner");
+ 
+  product.relatedProducts.forEach((p, i) => {
+    const relatedProductElement = document.createElement("div")
+    relatedProductElement.onclick = function(){
+      localStorage.setItem("productID", p.id);
+      window.location = "product-info.html";
+    }
+    relatedProductElement.classList.add("carousel-item")
+    const relatedProductName = document.createElement("h3")
+    relatedProductName.innerHTML = p.name
+    relatedProductElement.appendChild(relatedProductName)
+
+
+    const relatedProductImg = document.createElement("img")
+    relatedProductImg.setAttribute('src', p.image)
+    relatedProductElement.appendChild(relatedProductImg)
+
+    if(i == 0) {
+      relatedProductElement.classList.add("active")
+    }
+  
+    relatedProducts.appendChild(relatedProductElement);
+  })
 }
-
-const submitComment = document.getElementById("submitComment");
-submitComment.addEventListener("click", function(){
-/*Voy a definir que va a hacer el botòn de enviar */
-const userNameDisplay = document.getElementById("userNameDisplay").value;
-const comentarioValue = document.getElementById("comentarioValue").value;
-const rating = document.getElementById("rating").value;
-const id=localStorage.getItem('productID')
-/*Voy a imprimir los comentarios existentes y también los que obtengo de los input */
-printComentarios([...comentarios, { product:id, user: userNameDisplay,  description: comentarioValue, dateTime: "Matilde", score: rating }])
-})
-
 
 /*Parte que agrega comentarios y  */
 function comentarios(product){
@@ -89,16 +102,38 @@ function estrellas(numero){
   }
   return estrellas;
 }
-  
+
+
+  // Obtener el nombre de usuario del localStorage
+  const username = localStorage.getItem('username');
+
+  // Mostrar el nombre de usuario en el campo de calificación
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  userNameDisplay.value = username ? username : ''; // Asignar el nombre o dejar vacío si no hay
+
+
+/* Desafiate */
+const submitComment = document.getElementById("submitComment");
+submitComment.addEventListener("click", function(){
+/*Voy a definir que va a hacer el botòn de enviar */
+const userNameDisplay = document.getElementById("userNameDisplay").value;
+const comentarioValue = document.getElementById("comentarioValue").value;
+const rating = document.getElementById("rating").value;
+const id=localStorage.getItem('productID')
+/*Voy a imprimir los comentarios existentes y también los que obtengo de los input */
+printComentarios([...comentarios, { product:id, user: userNameDisplay,  description: comentarioValue, dateTime: "Matilde", score: rating }])
+}) 
+
+
 document.addEventListener("DOMContentLoaded", function(e){
     let id=localStorage.getItem('productID')
-    let url=PRODUCT_INFO_URL+id+".json"
-   getJSONData(url).then(function(resultObj){
+    let url_info=PRODUCT_INFO_URL+id+".json"
+    let url_coment=PRODUCT_INFO_COMMENTS_URL+id+".json"
+   getJSONData(url_info).then(function(resultObj){
           if (resultObj.status === "ok"){
               let producto= resultObj.data
               renderProducts(producto)
           }
-
     });
     getJSONData(url_coment).then(function(resultObj){
       if (resultObj.status === "ok"){
