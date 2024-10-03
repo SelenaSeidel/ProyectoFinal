@@ -1,3 +1,5 @@
+let comentarios;
+
 function renderProducts(product) {
   const productList = document.getElementById("carrousel");
   productList.innerHTML = '';
@@ -60,6 +62,7 @@ function renderProducts(product) {
     relatedProductName.innerHTML = p.name
     relatedProductElement.appendChild(relatedProductName)
 
+
     const relatedProductImg = document.createElement("img")
     relatedProductImg.setAttribute('src', p.image)
     relatedProductElement.appendChild(relatedProductImg)
@@ -100,12 +103,27 @@ function estrellas(numero){
   return estrellas;
 }
 
+
   // Obtener el nombre de usuario del localStorage
   const username = localStorage.getItem('username');
 
   // Mostrar el nombre de usuario en el campo de calificación
   const userNameDisplay = document.getElementById("userNameDisplay");
   userNameDisplay.value = username ? username : ''; // Asignar el nombre o dejar vacío si no hay
+
+
+/* Desafiate */
+const submitComment = document.getElementById("submitComment");
+submitComment.addEventListener("click", function(){
+/*Voy a definir que va a hacer el botòn de enviar */
+const userNameDisplay = document.getElementById("userNameDisplay").value;
+const comentarioValue = document.getElementById("comentarioValue").value;
+const rating = document.getElementById("rating").value;
+const id=localStorage.getItem('productID')
+/*Voy a imprimir los comentarios existentes y también los que obtengo de los input */
+printComentarios([...comentarios, { product:id, user: userNameDisplay,  description: comentarioValue, dateTime: "Matilde", score: rating }])
+}) 
+
 
 document.addEventListener("DOMContentLoaded", function(e){
     let id=localStorage.getItem('productID')
