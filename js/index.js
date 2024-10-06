@@ -20,9 +20,5 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 
-    let boton = document.getElementById("SalirBtn")
-    boton.addEventListener("click", function () {  //al hacer click
-        localStorage.setItem('authenticated', 'false');
-        window.location.href = 'login.html';
-    })
+    
 });

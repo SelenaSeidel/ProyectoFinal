@@ -1,0 +1,17 @@
+#tituloCat{
+    margin-top: 2vh;
+    text-align: center;
+}
+
+#Proddesc{
+   margin-top: 10vh;
+    text-align: center;
+}
+
+.carousel {
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+}

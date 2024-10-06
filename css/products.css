@@ -71,6 +71,10 @@
   font-weight: bold;
 }
 
+#related-products .carousel-item img {
+  width: inherit;
+}
+
 @media (max-width:972px) {
     .swiper-container {
         margin-top: 50px;
