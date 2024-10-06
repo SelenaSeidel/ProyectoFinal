@@ -1,5 +1,3 @@
-let comentarios;
-
 function renderProducts(product) {
   const productList = document.getElementById("carrousel");
   productList.innerHTML = '';
@@ -103,11 +101,10 @@ function estrellas(numero){
   return estrellas;
 }
 
-
-  // Obtener el nombre de usuario del localStorage
+// Obtener el nombre de usuario del localStorage
   const username = localStorage.getItem('username');
 
-  // Mostrar el nombre de usuario en el campo de calificación
+// Mostrar el nombre de usuario en el campo de calificación
   const userNameDisplay = document.getElementById("userNameDisplay");
   userNameDisplay.value = username ? username : ''; // Asignar el nombre o dejar vacío si no hay
 
@@ -116,12 +113,16 @@ function estrellas(numero){
 const submitComment = document.getElementById("submitComment");
 submitComment.addEventListener("click", function(){
 /*Voy a definir que va a hacer el botòn de enviar */
-const userNameDisplay = document.getElementById("userNameDisplay").value;
+
 const comentarioValue = document.getElementById("comentarioValue").value;
 const rating = document.getElementById("rating").value;
 const id=localStorage.getItem('productID')
-/*Voy a imprimir los comentarios existentes y también los que obtengo de los input */
-printComentarios([...comentarios, { product:id, user: userNameDisplay,  description: comentarioValue, dateTime: "Matilde", score: rating }])
+/*Voy a imprimir el comentario */
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+console.log();
+comentarios([{product:id, user: userNameDisplay.value,  description: comentarioValue, dateTime:date + ' '+ time, score: rating }])
 }) 
 
 
