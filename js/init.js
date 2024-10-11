@@ -51,7 +51,7 @@ let getJSONData = function(url){
 document.addEventListener("DOMContentLoaded", function () {
   let userName = localStorage.getItem('username');
   if (userName) {
-    document.getElementById("userName").textContent = `¡Hola ${userName}!`;
+    document.getElementById("userName").textContent = `Bienvenido, ${userName}`;
   }
 
   let boton = document.getElementById("SalirBtn")
@@ -60,3 +60,4 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = 'login.html';
   })
 });
+
