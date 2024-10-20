@@ -20,4 +20,5 @@ body.dark-mode {
     background-color: #f0f0f0; /* Color de fondo por si no hay imagen */
     background-size: cover; /* Asegura que la imagen cubra todo el área */
     background-position: center;
+    background-image: url("../img/profileimg.jpeg");
 }
