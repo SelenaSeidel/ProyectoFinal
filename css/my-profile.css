@@ -1,0 +1,23 @@
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.profile-title {
+    margin-top: 1.5rem; /* Ajusta este valor según lo necesites */
+}
+
+.profile-photo {
+    width: 150px; /* Ancho deseado */
+    height: 150px; /* Alto deseado */
+    border-radius: 50%; /* Hace que sea un círculo */
+    background-color: #f0f0f0; /* Color de fondo por si no hay imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el área */
+    background-position: center;
+}
