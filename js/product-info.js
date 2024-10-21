@@ -159,3 +159,25 @@ document.addEventListener("DOMContentLoaded", function(e){
     }
   })
 
+// modo noche - modo dia
+const toggleButton = document.getElementById('toggle-theme');
+const body = document.body;
+
+function toggleTheme() {
+   
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    
+    toggleButton.textContent = isDarkMode ? 'Cambiar a Modo Día' : 'Cambiar a Modo Noche';
+}
+
+const darkMode = localStorage.getItem('darkMode');
+
+if (darkMode === 'enabled') {
+    body.classList.add('dark-mode');
+    toggleButton.textContent = 'Cambiar a Modo Día';
+}
+toggleButton.addEventListener('click', toggleTheme);
+
