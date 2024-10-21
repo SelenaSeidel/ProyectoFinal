@@ -1,109 +1,79 @@
-cargarDatos();
+document.addEventListener('DOMContentLoaded', () => {
+    cargarDatos();
+    
+    // Manejar el evento de envío del formulario
+    document.getElementById('profileForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evitar el envío normal del formulario
+        guardarDatos();
+    });
 
-// Manejar el evento de envío del formulario
-document.getElementById('profileForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Evitar el envío normal del formulario
-    guardarDatos();
-});
+    // Manejando el switch de modo noche
+    const moodSwitch = document.getElementById('moodSwitch');
+    moodSwitch.addEventListener('change', function () {
+        if (this.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('dark-mode', 'true'); // Guardar el estado en localStorage
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('dark-mode', 'false'); // Guardar el estado en localStorage
+        }
+    });
 
-// Actualizar imagen de perfil usando local storage
-cambiarFoto();
-
-// Manejar el cambio del interruptor de modo noche
-const moodSwitch = document.getElementById('moodSwitch');
-moodSwitch.addEventListener('change', function() {
-    if (this.checked) {
-        document.body.classList.add('dark-mode'); // Agregar clase para modo oscuro
-        localStorage.setItem('darkMode', 'true'); // Guardar estado en localStorage
-    } else {
-        document.body.classList.remove('dark-mode'); // Remover clase para modo oscuro
-        localStorage.setItem('darkMode', 'false'); // Guardar estado en localStorage
+    // Cargar la configuración de modo noche desde el localStorage
+    const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+    moodSwitch.checked = isDarkMode;
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
     }
-});
 
-// Cargar estado del modo noche al cargar la página
-function cargarModoNoche() {
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'true') {
-        moodSwitch.checked = true; // Activar el interruptor
-        document.body.classList.add('dark-mode'); // Aplicar modo oscuro
-    }
-}
+    // Actualizar imagen de perfil usando local storage
+    cambiarFoto();
+});
 
 function cargarDatos() {
-    const user = localStorage.getItem('username');
-    const email = localStorage.getItem(`${user}-email`);
-
-    // Cargar email
-    if (email) {
-        document.getElementById('email').value = email;
-    }
-
-    // Cargar otros datos si existen
-    const nombre = localStorage.getItem(`${user}-nombre`) || '';
-    const segundoNombre = localStorage.getItem(`${user}-segundoNombre`) || '';
-    const apellido = localStorage.getItem(`${user}-apellido`) || '';
-    const segundoApellido = localStorage.getItem(`${user}-segundoApellido`) || '';
-    const telefono = localStorage.getItem(`${user}-telefono`) || '';
+    const nombre = localStorage.getItem('nombre') || '';
+    const apellido = localStorage.getItem('apellido') || '';
+    const email = localStorage.getItem('email') || '';
+    const foto = localStorage.getItem('fotoPerfil') || ''; // Obtener la imagen de perfil
 
     document.getElementById('nombre').value = nombre;
-    document.getElementById('segundoNombre').value = segundoNombre;
     document.getElementById('apellido').value = apellido;
-    document.getElementById('segundoApellido').value = segundoApellido;
-    document.getElementById('telefono').value = telefono;
+    document.getElementById('email').value = email;
 
-    cargarModoNoche(); // Cargar estado del modo noche
+    // Actualizar la imagen de perfil si existe
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    if (foto) {
+        fotoPerfil.style.backgroundImage = `url(${foto})`;
+    }
 }
 
 function guardarDatos() {
-    // Validar campos obligatorios
-    const nombre = document.getElementById('nombre').value.trim();
-    const apellido = document.getElementById('apellido').value.trim();
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const email = document.getElementById('email').value;
+    const foto = document.getElementById('fotoInput').files[0]; // Obtener la imagen seleccionada
 
-    if (!nombre || !apellido) {
-        alert("Por favor, completa todos los campos obligatorios.");
-        return;
-    }
+    localStorage.setItem('nombre', nombre);
+    localStorage.setItem('apellido', apellido);
+    localStorage.setItem('email', email);
 
-    const segundoNombre = document.getElementById('segundoNombre').value.trim();
-    const segundoApellido = document.getElementById('segundoApellido').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-
-    const user = localStorage.getItem('username');
-
-    // Guardar datos en localStorage
-    localStorage.setItem(`${user}-nombre`, nombre);
-    localStorage.setItem(`${user}-segundoNombre`, segundoNombre);
-    localStorage.setItem(`${user}-apellido`, apellido);
-    localStorage.setItem(`${user}-segundoApellido`, segundoApellido);
-    localStorage.setItem(`${user}-email`, email);
-    localStorage.setItem(`${user}-telefono`, telefono);
-
-    alert("Datos guardados correctamente.");
-}
-
-function guardarFoto() {
-    const file = document.getElementById("subirFoto").files[0];
-    if (file) {
-        base64(file);
+    // Guardar la imagen de perfil si se seleccionó
+    if (foto) {
+        const reader = new FileReader();
+        reader.onloadend = function () {
+            localStorage.setItem('fotoPerfil', reader.result); // Guardar la imagen en base64
+            cambiarFoto(); // Cambiar la foto de perfil
+        };
+        reader.readAsDataURL(foto);
     } else {
-        alert("Por favor, selecciona una imagen para subir.");
+        alert('Por favor, selecciona una imagen de perfil.');
     }
-}
-
-function base64(file) {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-        document.getElementById("fotoPerfil").style.backgroundImage = "url('" + reader.result + "')";
-        localStorage.setItem("fotoPerfil", reader.result); // Guardar la imagen en localStorage
-    };
 }
 
 function cambiarFoto() {
-    const fotoPerfil = localStorage.getItem("fotoPerfil");
-    if (fotoPerfil) {
-        document.getElementById("fotoPerfil").style.backgroundImage = "url('" + fotoPerfil + "')";
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    const foto = localStorage.getItem('fotoPerfil');
+    if (foto) {
+        fotoPerfil.style.backgroundImage = `url(${foto})`;
     }
 }
