@@ -1,5 +1,3 @@
-let comentarios;
-
 function renderProducts(product) {
   const productList = document.getElementById("carrousel");
   productList.innerHTML = '';
@@ -76,14 +74,15 @@ function renderProducts(product) {
 }
 
 /*Parte que agrega comentarios y  */
-function comentarios(product){
+function mostrarComentarios(comentarios){
   const tabla=document.getElementById("tablacomentarios")
-    product.forEach(element => {
-        let cantidadestrellas=estrellas(element.score)
+  tabla.innerHTML = ""
+  comentarios.forEach(comentario => {
+        let cantidadestrellas=estrellas(comentario.score)
         tabla.innerHTML+= `
     <tr>
-        <td class="table-warning p-2 text-center">${element.user}</td>
-        <td class="table-default p-2">${element.description} <small> ${element.dateTime}</small></td>
+        <td class="table-warning p-2 text-center">${comentario.user}</td>
+        <td class="table-default p-2">${comentario.description} <small> ${comentario.dateTime}</small></td>
         <td class="table-warning p-2 text-center">${cantidadestrellas}</td>
     </tr>`
     })
@@ -103,11 +102,10 @@ function estrellas(numero){
   return estrellas;
 }
 
-
-  // Obtener el nombre de usuario del localStorage
+// Obtener el nombre de usuario del localStorage
   const username = localStorage.getItem('username');
 
-  // Mostrar el nombre de usuario en el campo de calificación
+// Mostrar el nombre de usuario en el campo de calificación
   const userNameDisplay = document.getElementById("userNameDisplay");
   userNameDisplay.value = username ? username : ''; // Asignar el nombre o dejar vacío si no hay
 
@@ -115,13 +113,23 @@ function estrellas(numero){
 /* Desafiate */
 const submitComment = document.getElementById("submitComment");
 submitComment.addEventListener("click", function(){
-/*Voy a definir que va a hacer el botòn de enviar */
-const userNameDisplay = document.getElementById("userNameDisplay").value;
-const comentarioValue = document.getElementById("comentarioValue").value;
-const rating = document.getElementById("rating").value;
-const id=localStorage.getItem('productID')
-/*Voy a imprimir los comentarios existentes y también los que obtengo de los input */
-printComentarios([...comentarios, { product:id, user: userNameDisplay,  description: comentarioValue, dateTime: "Matilde", score: rating }])
+  /*Voy a definir que va a hacer el botòn de enviar */
+  const comentarioValue = document.getElementById("comentarioValue").value;
+  const rating = document.getElementById("rating").value;
+  const id=localStorage.getItem('productID')
+  /*Voy a imprimir el comentario */
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+  console.log();
+  const nuevoComentario = {product:id, user: userNameDisplay.value,  description: comentarioValue, dateTime:date + ' '+ time, score: rating }
+
+  const comentarios = JSON.parse(localStorage.getItem("comentarios")) || []
+  comentarios.push(nuevoComentario)
+
+  localStorage.setItem("comentarios", JSON.stringify(comentarios))
+
+  mostrarComentarios(comentarios)
 }) 
 
 
@@ -135,12 +143,20 @@ document.addEventListener("DOMContentLoaded", function(e){
               renderProducts(producto)
           }
     });
-    getJSONData(url_coment).then(function(resultObj){
-      if (resultObj.status === "ok"){
-          let producto= resultObj.data
-          comentarios(producto)
-      }
-  });
+
+    const comentarios = JSON.parse(localStorage.getItem("comentarios")) || []
+
+    if (comentarios.length == 0) {
+      getJSONData(url_coment).then(function(resultObj){
+        if (resultObj.status === "ok"){
+            let comentarios = resultObj.data
+            localStorage.setItem("comentarios", JSON.stringify(comentarios))
+            mostrarComentarios(comentarios)
+        }
+      });
+    }else{
+      mostrarComentarios(comentarios)
+    }
   })
 
 // modo noche - modo dia

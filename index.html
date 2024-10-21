@@ -10,21 +10,23 @@
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="bootstrap.bundle.min.js / bootstrap.bundle.js">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+        aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <ul class="navbar-nav w-100 justify-content-between">
+
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
+            <a class="nav-link" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -32,13 +34,27 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <span class="nav-link" id="userName"></span>
+
+
+          <li class="nav-item dropdown">
+            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+             <span id="userName"> </span>
+            </button> 
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li>
+               <a class="dropdown-item" href="cart.html">Mi Carrito</a>
+              </li>
+              <li>
+               <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
+             </li>
+             <li><hr class="dropdown-divider"></li>
+             <li>
+              <button id="SalirBtn" type="button" class="btn btn-light dropdown-item"> Cerrar Sesión</button>
+             </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <button id="SalirBtn" type="button" class="btn btn-light"> Cerrar Sesión</button>
-          </li>
-        </ul>
+
+        </ul> 
       </div>
     </div>
   </nav>
