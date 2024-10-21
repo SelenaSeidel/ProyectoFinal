@@ -1,14 +1,34 @@
-
 cargarDatos();
 
-    // Manejar el evento de envío del formulario
-    document.getElementById('profileForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Evitar el envío normal del formulario
-        guardarDatos();
-    });
+// Manejar el evento de envío del formulario
+document.getElementById('profileForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Evitar el envío normal del formulario
+    guardarDatos();
+});
 
-    // Actualizar imagen de perfil usando local storage
-    cambiarFoto();
+// Actualizar imagen de perfil usando local storage
+cambiarFoto();
+
+// Manejar el cambio del interruptor de modo noche
+const moodSwitch = document.getElementById('moodSwitch');
+moodSwitch.addEventListener('change', function() {
+    if (this.checked) {
+        document.body.classList.add('dark-mode'); // Agregar clase para modo oscuro
+        localStorage.setItem('darkMode', 'true'); // Guardar estado en localStorage
+    } else {
+        document.body.classList.remove('dark-mode'); // Remover clase para modo oscuro
+        localStorage.setItem('darkMode', 'false'); // Guardar estado en localStorage
+    }
+});
+
+// Cargar estado del modo noche al cargar la página
+function cargarModoNoche() {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'true') {
+        moodSwitch.checked = true; // Activar el interruptor
+        document.body.classList.add('dark-mode'); // Aplicar modo oscuro
+    }
+}
 
 function cargarDatos() {
     const user = localStorage.getItem('username');
@@ -31,6 +51,8 @@ function cargarDatos() {
     document.getElementById('apellido').value = apellido;
     document.getElementById('segundoApellido').value = segundoApellido;
     document.getElementById('telefono').value = telefono;
+
+    cargarModoNoche(); // Cargar estado del modo noche
 }
 
 function guardarDatos() {
@@ -74,21 +96,14 @@ function base64(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-        const user = localStorage.getItem('username');
-        localStorage.setItem(`${user}-profileImage`, reader.result);
-        cambiarFoto();
-    };
-    reader.onerror = function (error) {
-        console.log('Error: ', error);
+        document.getElementById("fotoPerfil").style.backgroundImage = "url('" + reader.result + "')";
+        localStorage.setItem("fotoPerfil", reader.result); // Guardar la imagen en localStorage
     };
 }
 
 function cambiarFoto() {
-    const user = localStorage.getItem('username');
-    const img = localStorage.getItem(`${user}-profileImage`);
-    if (img) {
-        document.getElementById("fotoPerfil").style.backgroundImage = "url(" + img + ")";
-    } else {
-        document.getElementById("fotoPerfil").style.backgroundImage = ""; // Si no hay imagen, limpiar el fondo
+    const fotoPerfil = localStorage.getItem("fotoPerfil");
+    if (fotoPerfil) {
+        document.getElementById("fotoPerfil").style.backgroundImage = "url('" + fotoPerfil + "')";
     }
 }
