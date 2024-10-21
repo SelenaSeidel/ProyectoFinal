@@ -47,17 +47,8 @@ function cargarDatos() {
     }
 }
 
-function guardarDatos() {
-    const nombre = document.getElementById('nombre').value;
-    const apellido = document.getElementById('apellido').value;
-    const email = document.getElementById('email').value;
+function guardarFoto(){
     const foto = document.getElementById('fotoInput').files[0]; // Obtener la imagen seleccionada
-
-    localStorage.setItem('nombre', nombre);
-    localStorage.setItem('apellido', apellido);
-    localStorage.setItem('email', email);
-
-    // Guardar la imagen de perfil si se seleccionó
     if (foto) {
         const reader = new FileReader();
         reader.onloadend = function () {
@@ -68,6 +59,18 @@ function guardarDatos() {
     } else {
         alert('Por favor, selecciona una imagen de perfil.');
     }
+}
+
+function guardarDatos() {
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const email = document.getElementById('email').value;
+    
+    localStorage.setItem('nombre', nombre);
+    localStorage.setItem('apellido', apellido);
+    localStorage.setItem('email', email);
+
+    guardarFoto()
 }
 
 function cambiarFoto() {
