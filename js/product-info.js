@@ -184,7 +184,6 @@ if (darkMode === 'enabled') {
 }
 toggleButton.addEventListener('click', toggleTheme);
 
-
 function Comprar() {
   let id = localStorage.getItem('productID');
   let url_info = PRODUCT_INFO_URL + id + ".json";
@@ -216,3 +215,4 @@ function Comprar() {
 }
 
 document.getElementById("comprar").addEventListener('click', Comprar);
+

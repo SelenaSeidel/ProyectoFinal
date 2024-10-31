@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa; /* Color claro por defecto */
+    color: #212529; /* Color de texto oscuro */
+    transition: background-color 0.3s, color 0.3s; /* Suave transición de colores */
+}
+
+.dark-mode {
+    background-color: #343a40; /* Color oscuro para el modo noche */
+    color: #ffffff; /* Color de texto claro */
+}
+
+.profile-photo {
+    width: 150px; /* Aumentar el tamaño para que sea visible */
+    height: 150px; /* Aumentar el tamaño para que sea visible */
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid transparent; /* Borde por defecto */
+    background-color: #ccc; /* Color de fondo si no hay imagen */
+}
