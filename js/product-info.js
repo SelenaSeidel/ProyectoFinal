@@ -157,5 +157,62 @@ document.addEventListener("DOMContentLoaded", function(e){
     }else{
       mostrarComentarios(comentarios)
     }
+  
+  
+  
   })
 
+// modo noche - modo dia
+const toggleButton = document.getElementById('toggle-theme');
+const body = document.body;
+
+function toggleTheme() {
+   
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    
+    toggleButton.textContent = isDarkMode ? 'Cambiar a Modo Día' : 'Cambiar a Modo Noche';
+}
+
+const darkMode = localStorage.getItem('darkMode');
+
+if (darkMode === 'enabled') {
+    body.classList.add('dark-mode');
+    toggleButton.textContent = 'Cambiar a Modo Día';
+}
+toggleButton.addEventListener('click', toggleTheme);
+
+
+function Comprar() {
+  let id = localStorage.getItem('productID');
+  let url_info = PRODUCT_INFO_URL + id + ".json";
+
+  getJSONData(url_info).then(function(resultObj) {
+    if (resultObj.status === "ok") {
+      let producto = resultObj.data;
+
+      // Recuperar el carrito de localStorage
+      let Carrito = localStorage.getItem("Carrito");
+
+      if (Carrito === null) {
+        Carrito = []; // Si no hay carrito, crear un array vacío
+      } else {
+        Carrito = JSON.parse(Carrito); // Si existe, parsear el JSON a un array
+      }
+
+       // Verificar si el producto ya está en el carrito
+       const productoExistente = Carrito.find(item => item.id === producto.id);
+      
+       if (!productoExistente) {
+         Carrito.push(producto); // Agregar el producto al array si no está en el carrito
+         localStorage.setItem("Carrito", JSON.stringify(Carrito)); // Guardar el array actualizado en localStorage
+       }
+ 
+       window.location = "cart.html";
+     }
+  });
+}
+
+document.getElementById("comprar").addEventListener('click', Comprar);
