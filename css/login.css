@@ -1,0 +1,82 @@
+/*celular*/
+@media (max-width: 375px){
+    .imagenLogin {   /*no mostrar imagen*/
+        display: none;    
+    }
+    .contenidoLogin{ /*separación y ubicación*/
+        padding: 0% 10% 0%;
+    }
+    h2{/*separación y ubicación*/
+        padding: 2% 15% 2%;
+    }
+    body{
+        font-size: small;
+    }
+    .box{  /*para checkbox y olvidaste contraseña*/
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .box>div{  /*separar recordar y contra*/
+         margin-bottom: 5%;
+        }
+    .form-check{
+        align-content: left;
+    }
+    #regBtn{      /*ajustar boton*/
+        border: none;
+        font-size: medium;
+        width: fit-content;
+    }
+    .form-control{/*agrandar campos de texto*/
+        padding: 3.5%;
+        font-size: 2vh;
+    }  
+    div.center{    /*centrar boton*/
+        text-align: center;
+    }
+    footer{
+        font-size: 1.5vh;
+    }
+}
+
+/*tablet*/
+@media (max-width: 768px){
+    .img-fluid{ 
+        margin-left: -100vw;
+        overflow: hidden;
+    } 
+    .imagenLogin{
+        padding-top: 10%;
+        margin-left: 100vw;
+        margin-right: 85vw;
+        margin-bottom: -2vh;
+        overflow: hidden;
+    }
+    .contenedorPrincipal{ /*para que imagen se vea arriba*/
+        display: flex;
+        flex-direction: column; 
+        overflow: hidden
+    }
+    body{
+        font-size: large;
+        overflow: hidden;
+    }
+    #regBtn{      /*ajustar boton*/
+        border: none;
+        margin-top: 7%;
+    }
+    
+    h2{
+        font-size: 4vh;
+    }
+    form>div{/*separar campos*/
+        padding-bottom: 1vh;
+    }
+    .form-control{/*agrandar campos de texto*/
+        padding: 3.5%;
+        font-size: 2vh;
+    }  
+    footer{
+        font-size: 1.5vh;
+    }
+}

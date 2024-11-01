@@ -1,0 +1,95 @@
+.swiper-container {
+  margin-top: 50px;
+  width: 800px;
+  height: 400px;
+  max-width: 1200px;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 10px;
+  border-radius: 20px;
+  max-width: 100%; 
+}
+
+.swiper-slide img {
+  width: 650px;
+  height: inherit;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.swiper-slide .swiper-slide-caption {
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 20px 20px;
+  text-align: center;
+  width: 650px;
+  background-color: #00000042;
+
+}
+
+.swiper-pagination {
+  position: relative;
+  margin-top: 50px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #888;
+  opacity: 1;
+  border-radius: 50%;
+  margin: 0 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #333; 
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #888;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#related-products .carousel-item img {
+  width: inherit;
+}
+
+@media (max-width:972px) {
+    .swiper-container {
+        margin-top: 50px;
+        width: 800px;
+        height: 400px;
+        max-width: 1200px;
+        overflow: hidden;
+      }
+}
+
+@media (max-width: 535px) {
+ 
+   p {
+    font-size:xx-small;
+   }
+  
+    
+}

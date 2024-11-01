@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/products.css" rel="stylesheet">
+    <link href="css/product-info.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.bundle.min.js / bootstrap.bundle.js" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <button id="toggle-theme"></button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav w-100 justify-content-between">
+              
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="categories.html">Categorías</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="sell.html">Vender</a>
+              </li>
+              
+              <li class="nav-item dropdown">
+                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                 <span id="userName"> </span>
+                </button> 
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li>
+                   <a class="dropdown-item" href="cart.html">Mi Carrito</a>
+                  </li>
+                  <li>
+                   <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
+                 </li>
+                 <li><hr class="dropdown-divider"></li>
+                 <li>
+                  <button id="SalirBtn" type="button" class="btn btn-light dropdown-item"> Cerrar Sesión</button>
+                 </li>
+                </ul>
+              </li>
+    
+            </ul> 
+          </div>
+        </div>
+      </nav>
+      
+
+    <div id="tituloCat"></div>
+    <br>
+    <div id="products-content">
+        <div class="swiper-container">
+            <div class="swiper-wrapper" id="carrousel"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <div id="Proddesc">
+        <!-- Descripción del producto -->
+    </div>
+    <br>
+    <br>
+    <!--Comprar-->
+    <div class="text-center">
+    <button id="comprar" type="button" class="btn btn-success btn-lg ">Comprar</button>
+    </div>
+    
+    <div id="related-products" style="width: 30%; margin: auto;">
+        <h2>Productos relacionados:</h2>
+        <div id="related-products-carousel" class="carousel slide">
+            <div class="carousel-inner">
+                <!-- Aquí van los productos relacionados -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    
+    <div id="comentarios" class="container mt-5 justify-content-center">
+        <h3>Comentarios y calificaciones</h3>
+        <table class="table table-bordered table-rounded">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Usuario</th>
+                    <th scope="col">Comentario</th>
+                    <th class="text-center" scope="col">Calificación</th>
+                </tr>
+            </thead>
+            <tbody id="tablacomentarios"></tbody>
+        </table>
+    </div>
+    
+    <div id="formularioCalificacion" class="container mt-5">
+        <h2>Califica este producto</h2>
+        <div class="mb-3">
+            <label for="userNameDisplay" class="form-label">Usuario:</label>
+            <input type="text" class="form-control" id="userNameDisplay" readonly>
+        </div>
+    
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Comentario:</label>
+
+            <textarea class="form-control" id="comentarioValue" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+
+        </div>
+    
+        <div class="mb-3">
+            <label for="rating" class="form-label">Calificar:</label>
+            <select class="form-control" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    
+        <button type="button" class="btn btn-primary" id="submitComment">Enviar</button>
+    </div>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-end">
+                <a href="#">Volver arriba</a>
+            </p>
+            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a
+                    Programar</a></p>
+        </div>
+    </footer>
+    <div id="spinner-wrapper">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/product-info.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
