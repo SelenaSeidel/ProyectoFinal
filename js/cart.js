@@ -49,6 +49,26 @@ function showProductsList() {
             eliminarProducto(productId);
         });
     });
+   
+    // Añadir event listeners a cada campo de cantidad
+    document.querySelectorAll(".cantidad-input").forEach(input => {
+        input.addEventListener("input", actualizarSubtotal);
+    });
+}
+
+
+// Función para actualizar el subtotal en tiempo real
+function actualizarSubtotal(event) {
+    const input = event.target;
+    const id = parseInt(input.getAttribute("data-id"));
+    const cost = parseFloat(input.getAttribute("data-cost"));
+    const cantidad = parseInt(input.value);
+    
+    // Calcular el nuevo subtotal
+    const subtotal = cost * cantidad;
+    
+    // Actualizar el subtotal en la interfaz
+    document.getElementById(`subtotal-${id}`).textContent = `${subtotal}`;
 }
 
 // Función para eliminar producto por ID
@@ -76,4 +96,3 @@ document.addEventListener("DOMContentLoaded", function() {
     window.location.href = "index.html"; 
   });
 });
-

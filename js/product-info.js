@@ -216,3 +216,4 @@ function Comprar() {
 }
 
 document.getElementById("comprar").addEventListener('click', Comprar);
+
