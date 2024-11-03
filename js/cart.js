@@ -1,47 +1,61 @@
+let productosCarrito=[]
+
+// Función para establecer el ID del producto en localStorage y redirigir
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
+}
+
 // Función para mostrar la lista de productos
 function showProductsList() {
     let htmlContentToAppend = "";
-    if (productosCarrito.length == 0) {
-        htmlContentToAppend = "Carrito vacío";
-    } else {
+    if (productosCarrito.length==0){
+        htmlContentToAppend="Carrito vacío"
+    }else{
         for (let product of productosCarrito) {
-            htmlContentToAppend += `
-                <div class="card mb-3">
-                    <div class="row g-0 align-items-center cursor-active">
-                        <div class="col-2">
-                            <img src="${product.images[0]}" alt="${product.name}" class="img-fluid rounded-start">
-                        </div>
-                        <div onclick="setProductID(${product.id})" class="col-8">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="text-success">${product.currency} ${product.cost}</p>
-                                <p class="text-muted">Subtotal: <span id="subtotal-${product.id}">${product.currency} ${product.cost}</span></p>
-                            </div>
-                        </div>
-                        <div class="col-2 text-center">
-                            <input id="cantidad-${product.id}" class="mb-2 cantidad-input" type="number" min="1" max="100" step="1" value="1" data-id="${product.id}" data-cost="${product.cost}">
-                            <button class="btn btn-danger btn-sm eliminar-btn" data-id="${product.id}">Eliminar</button>
-                        </div>
-                    </div>
-                </div>`;
+        htmlContentToAppend += `
+            <div class="card mb-3">
+                      <div class="row g-0 align-items-center cursor-active">
+                          <div class="col-2">
+                              <img src="${product.images[0]}" alt="${product.name}" class="img-fluid rounded-start">
+                          </div>
+                          <div onclick="setProductID(${product.id})" class="col-8">
+                              <div class="card-body">
+                                  <h5 class="card-title">${product.name}</h5>
+                                  <p class="text-success">${product.currency} ${product.cost}</p>
+                                  <p class="text-muted">subtotal: $250</p>
+                              </div>
+                          </div>
+                          <div class="col-2 text-center">
+                          <input id="numberInput" class="mb-2" type="number" min="1" max="100" step="1" value="1">    
+                         
+                              <button class="btn btn-danger btn-sm eliminar-btn" data-id="${product.id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg></button>
+                          </div>
+                      </div>
+                  </div>`;
         }
+        
     }
 
     document.getElementById("listado").innerHTML = htmlContentToAppend;
 
     // Añadir event listeners a cada botón de eliminar
     document.querySelectorAll(".eliminar-btn").forEach(button => {
-        button.addEventListener("click", function() {
+     button.addEventListener("click", function() {
             const productId = parseInt(this.getAttribute("data-id"));
             eliminarProducto(productId);
         });
     });
-
+   
     // Añadir event listeners a cada campo de cantidad
     document.querySelectorAll(".cantidad-input").forEach(input => {
         input.addEventListener("input", actualizarSubtotal);
     });
 }
+
 
 // Función para actualizar el subtotal en tiempo real
 function actualizarSubtotal(event) {
@@ -59,20 +73,26 @@ function actualizarSubtotal(event) {
 
 // Función para eliminar producto por ID
 function eliminarProducto(id) {
+    // Buscar el índice del producto en el array
     const index = productosCarrito.findIndex(product => product.id === id);
     if (index !== -1) {
+        // Eliminar el producto del array
         productosCarrito.splice(index, 1);
+        
+        // Actualizar el localStorage
         localStorage.setItem("Carrito", JSON.stringify(productosCarrito));
+        
+        // Recargar la lista de productos
         showProductsList();
     }
 }
 
-// Event listener para cargar los productos al inicio
+// Event listener
 document.addEventListener("DOMContentLoaded", function() {
     productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
     showProductsList();
-
+    
     document.getElementById("seguirComprando").addEventListener("click", function() {
-        window.location.href = "index.html"; 
-    });
+    window.location.href = "index.html"; 
+  });
 });
