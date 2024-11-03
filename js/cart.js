@@ -8,12 +8,24 @@ function setProductID(id) {
 
 // Función para mostrar la lista de productos
 function showProductsList() {
+    let totalUYU = 0; // Acumulador para total en UYU
+    let totalUSD = 0; // Acumulador para total en USD
     let htmlContentToAppend = "";
     if (productosCarrito.length==0){
         htmlContentToAppend="Carrito vacío"
     }else{
         for (let product of productosCarrito) {
-        htmlContentToAppend += `
+            const storedQuantity = localStorage.getItem(`cantidad-${product.id}`) || 1; // Valor por defecto es 1 si no hay en localStorage
+            const subtotal = product.cost * storedQuantity; // Calcular subtotal
+
+            // Acumular el subtotal en la moneda correspondiente
+            if (product.currency === "UYU") {
+                totalUYU += subtotal;
+            } else if (product.currency === "USD") {
+                totalUSD += subtotal;
+            }
+        
+            htmlContentToAppend += `
             <div class="card mb-3">
                       <div class="row g-0 align-items-center cursor-active">
                           <div class="col-2">
@@ -23,12 +35,11 @@ function showProductsList() {
                               <div class="card-body">
                                   <h5 class="card-title">${product.name}</h5>
                                   <p class="text-success">${product.currency} ${product.cost}</p>
-                                  <p class="text-muted">subtotal: $250</p>
+                                  <p class="text-muted">Subtotal: <span id="subtotal-${product.id}">${product.currency} ${subtotal.toFixed(2)}</span></p>
                               </div>
                           </div>
                           <div class="col-2 text-center">
-                          <input id="numberInput" class="mb-2" type="number" min="1" max="100" step="1" value="1">    
-                         
+                          <input id="cantidad-${product.id}" class="mb-2 cantidad-input" type="number" min="1" max="100" step="1" value="${storedQuantity}" data-id="${product.id}" data-cost="${product.cost}">
                               <button class="btn btn-danger btn-sm eliminar-btn" data-id="${product.id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -41,6 +52,11 @@ function showProductsList() {
     }
 
     document.getElementById("listado").innerHTML = htmlContentToAppend;
+    
+
+    // Actualizar los totales en la interfaz
+    document.getElementById("total-uyu").innerHTML = `UYU$ ${totalUYU.toFixed(2)}`;
+    document.getElementById("total-usd").innerHTML = `USD$ ${totalUSD.toFixed(2)}`;
 
     // Añadir event listeners a cada botón de eliminar
     document.querySelectorAll(".eliminar-btn").forEach(button => {
@@ -50,11 +66,47 @@ function showProductsList() {
         });
     });
    
-    // Añadir event listeners a cada campo de cantidad
-    document.querySelectorAll(".cantidad-input").forEach(input => {
-        input.addEventListener("input", actualizarSubtotal);
+     // Añadir event listeners a cada campo de cantidad
+     const cantidadInputs = document.querySelectorAll(".cantidad-input");
+     cantidadInputs.forEach(input => {
+         input.addEventListener("input", function() {
+             const productId = this.getAttribute("data-id");
+             const cantidad = this.value;
+             localStorage.setItem(`cantidad-${productId}`, cantidad);
+ 
+             // Actualizar subtotal del producto
+             const product = productosCarrito.find(p => p.id === parseInt(productId));
+             const subtotal = product.cost * cantidad;
+             document.getElementById(`subtotal-${product.id}`).innerHTML = `${product.currency} ${subtotal.toFixed(2)}`;
+ 
+             // Llama a la función para recalcular totales
+             actualizarTotal();
+         });
+     });
+ }
+
+// Función para actualizar el total en el resumen
+function actualizarTotal() {
+    let totalUYU = 0;
+    let totalUSD = 0;
+
+    productosCarrito.forEach(product => {
+        const cantidad = localStorage.getItem(`cantidad-${product.id}`) || 1;
+        const subtotal = product.cost * cantidad; // Calcular subtotal
+
+        // Sumar al total en la moneda correspondiente
+        if (product.currency === "UYU") {
+            totalUYU += subtotal;
+        } else if (product.currency === "USD") {
+            totalUSD += subtotal;
+        }
     });
+
+    // Actualizar los totales en la interfaz
+    document.getElementById("total-uyu").innerHTML = `UYU$ ${totalUYU.toFixed(2)}`;
+    document.getElementById("total-usd").innerHTML = `USD$ ${totalUSD.toFixed(2)}`;
 }
+
 
 
 // Función para actualizar el subtotal en tiempo real
@@ -70,6 +122,7 @@ function actualizarSubtotal(event) {
     // Actualizar el subtotal en la interfaz
     document.getElementById(`subtotal-${id}`).textContent = `${subtotal}`;
 }
+
 
 // Función para eliminar producto por ID
 function eliminarProducto(id) {
