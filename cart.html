@@ -9,6 +9,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -20,6 +22,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <ul class="navbar-nav w-100 justify-content-between">
+
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -52,14 +55,66 @@
       </div>
     </div>
   </nav>
+ 
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+      <div class="container my-5">
+          <h1 class="mb-4">Mi Carrito</h1>
+          <div class="row">
+              <!-- Carrito de compras -->
+              <div class="col-md-8">
+                  <!-- Productos -->
+                <div id="listado"></div>
+                  <button class="btn btn-success w-100 mt-3" id="seguirComprando">SEGUIR COMPRANDO</button>  
+              </div>
+              <!-- Resumen-->
+              <div class="col-md-4">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">Resumen</h5>
+                          <p id="Cant_prod"> </p>
+      
+                          <div class="mb-3">
+                              <label for="shipping-method" class="form-label">Elige método de envío</label>
+                              <select class="form-select" id="shipping-method">
+                                  <option selected>Envío estándar $150</option>
+                                  <option >Envío express $250</option>
+                                  <option >Pick up $0</option>
+                              </select>
+                          </div>
+      
+                          <div class="mb-3">
+                              <label for="coupon" class="form-label">Cupón</label>
+                              <input type="text" class="form-control" id="coupon" placeholder="Ingresa tu cupón">
+                          </div>
+      
+                          <h6 class="mt-4">Métodos de Pago</h6>
+                          <div class="d-flex mb-3">
+                              <img src="img/visa.jpg" alt="Visa" class="img-fluid me-2" style="width: 40px;">
+                              <img src="img/mastercard.jpg" alt="Mastercard" class="img-fluid me-2" style="width: 40px;">
+                              <img src="img/abitab.png.jpg" alt="Abitab" class="img-fluid me-2" style="width: 40px;">
+                              <img src="img/redpagos.jpg" alt="Redpagos" class="img-fluid me-2" style="width: 40px;">
+                              <img src="img/paypal.jpg" alt="Paypal" class="img-fluid" style="width: 40px;">
+                          </div>
+      
+                          <div class="d-flex justify-content-between">
+                            <p class="fw-bold">TOTAL UYU</p>
+                            <p id="total-uyu" class="fw-bold">UYU$ 0.00</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="fw-bold">TOTAL USD</p>
+                            <p id="total-usd" class="fw-bold">USD$ 0.00</p>
+                        </div>
+      
+                          <button class="btn btn-success w-100">COMPRAR</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
-  </main>
-  <footer class="text-muted">
+
+
+
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
@@ -78,6 +133,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
