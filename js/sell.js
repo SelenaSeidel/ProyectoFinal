@@ -28,6 +28,11 @@ function updateTotalCosts(){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+        
+    // Calcular cantidad de productos en el carrito
+    document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
+    
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
         updateTotalCosts();

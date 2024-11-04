@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+        // Calcular cantidad de productos en el carrito
+        document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
+        
     cargarDatos();
     
     // Manejar el evento de envío del formulario

@@ -134,6 +134,10 @@ submitComment.addEventListener("click", function(){
 
 
 document.addEventListener("DOMContentLoaded", function(e){
+  productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+  // Calcular cantidad de productos en el carrito
+  document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
+  
     let id=localStorage.getItem('productID')
     let url_info=PRODUCT_INFO_URL+id+".json"
     let url_coment=PRODUCT_INFO_COMMENTS_URL+id+".json"

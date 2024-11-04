@@ -88,6 +88,11 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+        productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+        
+        // Calcular cantidad de productos en el carrito
+        document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
+        
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
