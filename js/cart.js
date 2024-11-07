@@ -146,6 +146,11 @@ document.addEventListener("DOMContentLoaded", function() {
     showProductsList();
     
     document.getElementById("seguirComprando").addEventListener("click", function() {
-    window.location.href = "index.html"; 
-  });
+        window.location.href = "index.html"; 
+    });
+
+    // Calcular cantidad de productos en el carrito
+    document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
 });
+
+

@@ -49,6 +49,10 @@ let getJSONData = function(url){
    
 }
 document.addEventListener("DOMContentLoaded", function () {
+  productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+        
+  // Calcular cantidad de productos en el carrito
+  document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
   let userName = localStorage.getItem('username');
   if (userName) {
     document.getElementById("userName").textContent = `Bienvenido, ${userName}`;

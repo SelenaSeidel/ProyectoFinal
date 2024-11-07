@@ -117,6 +117,9 @@ function showCatName() {
 
 // Event listeners para ordenar y filtrar productos
 document.addEventListener("DOMContentLoaded", function() {
+    productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];   
+    // Calcular cantidad de productos en el carrito
+     document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
     const categoryId = localStorage.getItem("catID");
     const url = PRODUCTS_URL + categoryId + EXT_TYPE;
 
