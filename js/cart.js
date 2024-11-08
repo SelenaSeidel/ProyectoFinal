@@ -1,4 +1,11 @@
 let productosCarrito=[]
+const envioCostoUSDMOSTRAR = document.getElementById('costo-envio-usd');
+const envioCostoUYUMOSTRAR = document.getElementById('costo-envio-uyu');
+const totalFinalUSDMOSTRAR = document.getElementById('total-final-usd');
+const totalFinalUYUMOSTRAR = document.getElementById('total-final-uyu');
+
+const totalDisplay = document.getElementById('totalDisplay');
+
 
 // Función para establecer el ID del producto en localStorage y redirigir
 function setProductID(id) {
@@ -49,20 +56,21 @@ function showProductsList() {
                   </div>`;
         }
         
+       actualizarTotales();
     }
 
     document.getElementById("listado").innerHTML = htmlContentToAppend;
     
 
     // Actualizar los totales en la interfaz
-    document.getElementById("total-uyu").innerHTML = `UYU$ ${totalUYU.toFixed(2)}`;
-    document.getElementById("total-usd").innerHTML = `USD$ ${totalUSD.toFixed(2)}`;
+    document.getElementById("total-uyu").innerHTML = `${totalUYU.toFixed(2)}`;
+    document.getElementById("total-usd").innerHTML = `${totalUSD.toFixed(2)}`;
 
     // Añadir event listeners a cada botón de eliminar
     document.querySelectorAll(".eliminar-btn").forEach(button => {
      button.addEventListener("click", function() {
             const productId = parseInt(this.getAttribute("data-id"));
-            eliminarProducto(productId);
+            eliminarProducto(productId); 
         });
     });
    
@@ -76,17 +84,15 @@ function showProductsList() {
  
              // Actualizar subtotal del producto
              const product = productosCarrito.find(p => p.id === parseInt(productId));
-             const subtotal = product.cost * cantidad;
-             document.getElementById(`subtotal-${product.id}`).innerHTML = `${product.currency} ${subtotal.toFixed(2)}`;
- 
+             const subtotal = product.cost * cantidad; 
              // Llama a la función para recalcular totales
-             actualizarTotal();
+             actualizarTotales();
          });
      });
  }
 
 // Función para actualizar el total en el resumen
-function actualizarTotal() {
+function actualizarTotales() {
     let totalUYU = 0;
     let totalUSD = 0;
 
@@ -102,14 +108,27 @@ function actualizarTotal() {
         }
     });
 
-    // Actualizar los totales en la interfaz
-    document.getElementById("total-uyu").innerHTML = `UYU$ ${totalUYU.toFixed(2)}`;
-    document.getElementById("total-usd").innerHTML = `USD$ ${totalUSD.toFixed(2)}`;
-}
+    // Actualizar los subtotales en resumen
+    document.getElementById("total-uyu").innerHTML = ` ${totalUYU.toFixed(2)}`;
+    document.getElementById("total-usd").innerHTML = ` ${totalUSD.toFixed(2)}`;
+    
+    //ENVIO
+    const envioFactor = parseFloat(document.getElementById('tipoEnvio').value);
+    const envioCostoUYU = totalUYU * envioFactor;
+    const envioCostoUSD = totalUSD * envioFactor;
+    envioCostoUYUMOSTRAR.innerHTML = ` ${envioCostoUYU.toFixed(2)}`;
+    envioCostoUSDMOSTRAR.innerHTML = ` ${envioCostoUSD.toFixed(2)}`;
+    const totalFinalUYU = totalUYU + envioCostoUYU;
+    const totalFinalUSD = totalUSD + envioCostoUSD;
+    totalFinalUSDMOSTRAR.innerHTML = ` ${totalFinalUSD.toFixed(2)}`;
+    totalFinalUYUMOSTRAR.innerHTML = ` ${totalFinalUYU.toFixed(2)}`;
+}  
+
+// Evento para el cambio de tipo de envío
+document.getElementById('tipoEnvio').addEventListener('change', actualizarTotales);
 
 
-
-// Función para actualizar el subtotal en tiempo real
+// Función para actualizar el subtotal de cada producto en tiempo real
 function actualizarSubtotal(event) {
     const input = event.target;
     const id = parseInt(input.getAttribute("data-id"));
@@ -137,6 +156,7 @@ function eliminarProducto(id) {
         
         // Recargar la lista de productos
         showProductsList();
+        actualizarTotales();
     }
 }
 
@@ -144,7 +164,7 @@ function eliminarProducto(id) {
 document.addEventListener("DOMContentLoaded", function() {
     productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
     showProductsList();
-    
+
     document.getElementById("seguirComprando").addEventListener("click", function() {
         window.location.href = "index.html"; 
     });
