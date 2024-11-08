@@ -3,6 +3,7 @@ const envioCostoUSDMOSTRAR = document.getElementById('costo-envio-usd');
 const envioCostoUYUMOSTRAR = document.getElementById('costo-envio-uyu');
 const totalFinalUSDMOSTRAR = document.getElementById('total-final-usd');
 const totalFinalUYUMOSTRAR = document.getElementById('total-final-uyu');
+const CANTIDAD_PRODUCTOS = document.getElementById("Cant_prod");
 
 const totalDisplay = document.getElementById('totalDisplay');
 
@@ -95,11 +96,12 @@ function showProductsList() {
 function actualizarTotales() {
     let totalUYU = 0;
     let totalUSD = 0;
-
+    //de paso actualizo cantidad de prod.
+    cantidadTOTAL=0
     productosCarrito.forEach(product => {
-        const cantidad = localStorage.getItem(`cantidad-${product.id}`) || 1;
+        const cantidad=parseFloat(localStorage.getItem(`cantidad-${product.id}`)) || 1;
         const subtotal = product.cost * cantidad; // Calcular subtotal
-
+        cantidadTOTAL+=cantidad   
         // Sumar al total en la moneda correspondiente
         if (product.currency === "UYU") {
             totalUYU += subtotal;
@@ -107,6 +109,8 @@ function actualizarTotales() {
             totalUSD += subtotal;
         }
     });
+    CANTIDAD_PRODUCTOS.innerHTML=`Cantidad de productos: ${cantidadTOTAL}`
+
 
     // Actualizar los subtotales en resumen
     document.getElementById("total-uyu").innerHTML = ` ${totalUYU.toFixed(2)}`;
