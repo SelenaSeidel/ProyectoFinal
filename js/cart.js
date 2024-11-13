@@ -142,7 +142,6 @@ function actualizarSubtotal(event) {
     document.getElementById(`subtotal-${id}`).textContent = `${subtotal}`;
 }
 
-
 // Función para eliminar producto por ID
 function eliminarProducto(id) {
     // Buscar el índice del producto en el array
