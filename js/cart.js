@@ -243,4 +243,4 @@ function validarYFinalizarCompra() {
 
     // Si todas las validaciones son correctas, mostrar mensaje de éxito
     if (isValid) 
-        alert("Compra realizada con éxito. ¡Gracias por tu compra!");
+        alert("Compra realizada con éxito. ¡Gracias por tu compra!");}
