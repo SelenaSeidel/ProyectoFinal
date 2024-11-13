@@ -175,70 +175,72 @@ document.addEventListener("DOMContentLoaded", function() {
 function validarYFinalizarCompra() {
     let isValid = true;
 
-    // Validación de dirección
-    const departamento = document.getElementById("departamento");
-    const localidad = document.getElementById("localidad");
-    const calle = document.getElementById("calle");
-    const numero = document.getElementById("numero");
-
-    // Verificar que los campos de dirección no estén vacíos
-    document.getElementById("departamentoError").style.display = departamento.value ? "none" : "block";
-    document.getElementById("localidadError").style.display = localidad.value ? "none" : "block";
-    document.getElementById("calleError").style.display = calle.value ? "none" : "block";
-    document.getElementById("numeroError").style.display = numero.value ? "none" : "block";
-    if (!departamento.value || !localidad.value || !calle.value || !numero.value) isValid = false;
-
-    // Validación de tipo de envío
-    const tipoEnvio = document.getElementById("tipoEnvio").value;
-    if (!tipoEnvio) {
-        alert("Por favor, selecciona un tipo de envío.");
+    // Validar si el carrito tiene productos
+    if (productosCarrito.length === 0) {
+        alert("Tu carrito está vacío. Por favor, agrega productos antes de proceder.");
         isValid = false;
     }
 
-    // Validación de cantidad de productos
-    const cantidadInputs = document.querySelectorAll(".cantidad-input");
-    cantidadInputs.forEach(input => {
-        if (parseInt(input.value) <= 0) {
-            alert("La cantidad de cada producto debe ser mayor a 0.");
+    if (isValid) {
+        // Validación de dirección
+        const departamento = document.getElementById("departamento");
+        const localidad = document.getElementById("localidad");
+        const calle = document.getElementById("calle");
+        const numero = document.getElementById("numero");
+
+        // Verificar que los campos de dirección no estén vacíos
+        document.getElementById("departamentoError").style.display = departamento.value ? "none" : "block";
+        document.getElementById("localidadError").style.display = localidad.value ? "none" : "block";
+        document.getElementById("calleError").style.display = calle.value ? "none" : "block";
+        document.getElementById("numeroError").style.display = numero.value ? "none" : "block";
+        if (!departamento.value || !localidad.value || !calle.value || !numero.value) isValid = false;
+
+        // Validación de tipo de envío
+        const tipoEnvio = document.getElementById("tipoEnvio").value;
+        if (!tipoEnvio) {
+            alert("Por favor, selecciona un tipo de envío.");
             isValid = false;
         }
-    });
 
-    // Validación de forma de pago
-    const formaPagoSeleccionada = document.querySelector('input[name="paymentMethod"]:checked');
-    if (!formaPagoSeleccionada) {
-        alert("Por favor, selecciona una forma de pago.");
-        isValid = false;
-    } else {
-        if (formaPagoSeleccionada.value === "credit") {
-            // Validación de tarjeta de crédito
-            const nombreTarjeta = document.getElementById("nombreTarjeta");
-            const numeroTarjeta = document.getElementById("numeroTarjeta");
-            const vencimientoTarjeta = document.getElementById("vencimientoTarjeta");
-            const codigoSeguridad = document.getElementById("codigoSeguridadTarjeta");
-
-            document.getElementById("nombreTarjetaError").style.display = nombreTarjeta.value ? "none" : "block";
-            document.getElementById("numeroTarjetaError").style.display = numeroTarjeta.value ? "none" : "block";
-            document.getElementById("vencimientoTarjetaError").style.display = vencimientoTarjeta.value ? "none" : "block";
-            document.getElementById("codigoSeguridadTarjetaError").style.display = codigoSeguridad.value ? "none" : "block";
-
-            if (!nombreTarjeta.value || !numeroTarjeta.value || !vencimientoTarjeta.value || !codigoSeguridad.value) {
+        // Validación de cantidad de productos
+        const cantidadInputs = document.querySelectorAll(".cantidad-input");
+        cantidadInputs.forEach(input => {
+            if (parseInt(input.value) <= 0) {
+                alert("La cantidad de cada producto debe ser mayor a 0.");
                 isValid = false;
             }
-        } else if (formaPagoSeleccionada.value === "bank") {
-            // Validación para transferencia bancaria
-            const homebankingSelect = document.getElementById("homebankingSelect");
-            document.getElementById("homebankingError").style.display = homebankingSelect.value ? "none" : "block";
-            if (!homebankingSelect.value) isValid = false;
+        });
+
+        // Validación de forma de pago
+        const formaPagoSeleccionada = document.querySelector('input[name="paymentMethod"]:checked');
+        if (!formaPagoSeleccionada) {
+            alert("Por favor, selecciona una forma de pago.");
+            isValid = false;
+        } else {
+            if (formaPagoSeleccionada.value === "credit") {
+                // Validación de tarjeta de crédito
+                const nombreTarjeta = document.getElementById("nombreTarjeta");
+                const numeroTarjeta = document.getElementById("numeroTarjeta");
+                const vencimientoTarjeta = document.getElementById("vencimientoTarjeta");
+                const codigoSeguridad = document.getElementById("codigoSeguridadTarjeta");
+
+                document.getElementById("nombreTarjetaError").style.display = nombreTarjeta.value ? "none" : "block";
+                document.getElementById("numeroTarjetaError").style.display = numeroTarjeta.value ? "none" : "block";
+                document.getElementById("vencimientoTarjetaError").style.display = vencimientoTarjeta.value ? "none" : "block";
+                document.getElementById("codigoSeguridadTarjetaError").style.display = codigoSeguridad.value ? "none" : "block";
+
+                if (!nombreTarjeta.value || !numeroTarjeta.value || !vencimientoTarjeta.value || !codigoSeguridad.value) {
+                    isValid = false;
+                }
+            } else if (formaPagoSeleccionada.value === "bank") {
+                // Validación para transferencia bancaria
+                const homebankingSelect = document.getElementById("homebankingSelect");
+                document.getElementById("homebankingError").style.display = homebankingSelect.value ? "none" : "block";
+                if (!homebankingSelect.value) isValid = false;
+            }
         }
     }
 
     // Si todas las validaciones son correctas, mostrar mensaje de éxito
-    if (isValid) {
+    if (isValid) 
         alert("Compra realizada con éxito. ¡Gracias por tu compra!");
-    }
-}
-
-// Añadir evento al botón "Finalizar compra"
-document.getElementById("finalizarCompra").addEventListener("click", validarYFinalizarCompra);
-
