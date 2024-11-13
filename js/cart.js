@@ -5,8 +5,6 @@ const totalFinalUSDMOSTRAR = document.getElementById('total-final-usd');
 const totalFinalUYUMOSTRAR = document.getElementById('total-final-uyu');
 
 const totalDisplay = document.getElementById('totalDisplay');
-
-
 // Función para establecer el ID del producto en localStorage y redirigir
 function setProductID(id) {
     localStorage.setItem("productID", id);
@@ -142,6 +140,7 @@ function actualizarSubtotal(event) {
     document.getElementById(`subtotal-${id}`).textContent = `${subtotal}`;
 }
 
+
 // Función para eliminar producto por ID
 function eliminarProducto(id) {
     // Buscar el índice del producto en el array
@@ -242,3 +241,4 @@ function validarYFinalizarCompra() {
 
 // Añadir evento al botón "Finalizar compra"
 document.getElementById("finalizarCompra").addEventListener("click", validarYFinalizarCompra);
+
