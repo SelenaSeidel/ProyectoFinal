@@ -169,6 +169,32 @@ document.addEventListener("DOMContentLoaded", function() {
     productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
     showProductsList();
 
+    const creditCardForm = document.getElementById("creditCardForm");
+    const bankTransferForm = document.getElementById("bankTransferForm");
+
+    // Escuchar cambios en el método de pago
+    document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
+        input.addEventListener("change", () => {
+            if (input.value === "credit") {
+                creditCardForm.style.display = "block";
+                bankTransferForm.style.display = "none";
+            } else if (input.value === "bank") {
+                creditCardForm.style.display = "none";
+                bankTransferForm.style.display = "block";
+            }
+        });
+    });
+
+    // Estado inicial: mostrar el formulario correcto basado en la opción seleccionada
+    const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    if (selectedPaymentMethod === "credit") {
+        creditCardForm.style.display = "block";
+        bankTransferForm.style.display = "none";
+    } else {
+        creditCardForm.style.display = "none";
+        bankTransferForm.style.display = "block";
+    }
+
     document.getElementById("seguirComprando").addEventListener("click", function() {
         window.location.href = "index.html"; 
     });
