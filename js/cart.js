@@ -169,6 +169,32 @@ document.addEventListener("DOMContentLoaded", function() {
     productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
     showProductsList();
 
+    const creditCardForm = document.getElementById("creditCardForm");
+    const bankTransferForm = document.getElementById("bankTransferForm");
+
+    // Escuchar cambios en el método de pago
+    document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
+        input.addEventListener("change", () => {
+            if (input.value === "credit") {
+                creditCardForm.style.display = "block";
+                bankTransferForm.style.display = "none";
+            } else if (input.value === "bank") {
+                creditCardForm.style.display = "none";
+                bankTransferForm.style.display = "block";
+            }
+        });
+    });
+
+    // Estado inicial: mostrar el formulario correcto basado en la opción seleccionada
+    const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    if (selectedPaymentMethod === "credit") {
+        creditCardForm.style.display = "block";
+        bankTransferForm.style.display = "none";
+    } else {
+        creditCardForm.style.display = "none";
+        bankTransferForm.style.display = "block";
+    }
+
     document.getElementById("seguirComprando").addEventListener("click", function() {
         window.location.href = "index.html"; 
     });
@@ -177,4 +203,72 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
 });
 
+// Validar y finalizar la compra
+function validarYFinalizarCompra() {
+    let isValid = true;
 
+    // Verificar que el carrito no esté vacío
+    if (productosCarrito.length === 0) {
+        alert("Tu carrito está vacío. Por favor, agrega productos antes de proceder.");
+        isValid = false;
+    }
+
+    // Validación de dirección
+    const departamento = document.getElementById("departamento");
+    const localidad = document.getElementById("localidad");
+    const calle = document.getElementById("calle");
+    const numero = document.getElementById("numero");
+
+    document.getElementById("departamentoError").style.display = departamento.value ? "none" : "block";
+    document.getElementById("localidadError").style.display = localidad.value ? "none" : "block";
+    document.getElementById("calleError").style.display = calle.value ? "none" : "block";
+    document.getElementById("numeroError").style.display = numero.value ? "none" : "block";
+    if (!departamento.value || !localidad.value || !calle.value || !numero.value) isValid = false;
+
+    // Validación de tipo de envío
+    const tipoEnvio = document.getElementById("tipoEnvio").value;
+    if (!tipoEnvio) {
+        alert("Por favor, selecciona un tipo de envío.");
+        isValid = false;
+    }
+
+    // Validación de cantidad de productos
+    document.querySelectorAll(".cantidad-input").forEach(input => {
+        if (isNaN(input.value) || parseInt(input.value) <= 0) {
+            alert("La cantidad de cada producto debe ser un número mayor a 0.");
+            isValid = false;
+        }
+    });
+
+    // Validación de forma de pago
+    const formaPagoSeleccionada = document.querySelector('input[name="paymentMethod"]:checked');
+    if (!formaPagoSeleccionada) {
+        alert("Por favor, selecciona una forma de pago.");
+        isValid = false;
+    } else {
+        if (formaPagoSeleccionada.value === "credit") {
+            const nombreTarjeta = document.getElementById("nombreTarjeta");
+            const numeroTarjeta = document.getElementById("numeroTarjeta");
+            const vencimientoTarjeta = document.getElementById("vencimientoTarjeta");
+            const codigoSeguridad = document.getElementById("codigoSeguridadTarjeta");
+
+            document.getElementById("nombreTarjetaError").style.display = nombreTarjeta.value ? "none" : "block";
+            document.getElementById("numeroTarjetaError").style.display = numeroTarjeta.value ? "none" : "block";
+            document.getElementById("vencimientoTarjetaError").style.display = vencimientoTarjeta.value ? "none" : "block";
+            document.getElementById("codigoSeguridadTarjetaError").style.display = codigoSeguridad.value ? "none" : "block";
+
+            if (!nombreTarjeta.value || !numeroTarjeta.value || !vencimientoTarjeta.value || !codigoSeguridad.value) {
+                isValid = false;
+            }
+        } else if (formaPagoSeleccionada.value === "bank") {
+            const homebankingSelect = document.getElementById("homebankingSelect");
+            document.getElementById("homebankingError").style.display = homebankingSelect.value ? "none" : "block";
+            if (!homebankingSelect.value) isValid = false;
+        }
+    }
+
+    if (isValid) alert("Compra realizada con éxito. ¡Gracias por tu compra!");
+}
+
+// Asignar evento al botón de finalizar compra
+document.getElementById("finalizarCompra").addEventListener("click", validarYFinalizarCompra);
