@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-    /*Para que no haya campos vacios al apretar el boton */
+     // Esperamos que el contenido de la página se haya cargado antes de ejecutar el código
     let boton = document.getElementById("regBtn");
-    boton.addEventListener("click", function () {  //al hacer click
+    // Asignamos un evento de clic al botón de registro
+    boton.addEventListener("click", function () { 
         let usuario=document.getElementById("nombreUsuario");
         let contraseña=document.getElementById("password");
         if (usuario.value=="" || contraseña.value==""){
             alert("Hay campos sin llenar");
         }else{
             localStorage.setItem('username', usuario.value);
-            localStorage.setItem('authenticated', 'true'); /*desafíate*/
+            localStorage.setItem('authenticated', 'true'); 
             location.replace("index.html");
-            /*redirecciona*/
+            // Redirigimos a la página de inicio
         }
     })
 })

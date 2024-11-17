@@ -9,7 +9,7 @@ let PESO_SYMBOL = "UYU ";
 let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
-//Función que se utiliza para actualizar los costos de publicación
+// Función que actualiza los costos en la interfaz de usuario
 function updateTotalCosts(){
     let unitProductCostHTML = document.getElementById("productCostText");
     let comissionCostHTML = document.getElementById("comissionText");
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         //Se realizan los controles necesarios,
         //En este caso se controla que se haya ingresado el nombre y categoría.
-        //Consulto por el nombre del producto
+        //Validar campos de entrada
         if (productNameInput.value === "")
         {
             productNameInput.classList.add('is-invalid');
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             infoMissing = true;
         }
 
-        //Consulto por el costo
+        // Validar que el precio es un número positivo válido
         if (productCost.value <=0)
         {
             productCost.classList.add('is-invalid');
@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             //Aquí ingresa si pasó los controles, irá a enviar
             //la solicitud para crear la publicación.
+            // Mostrar mensaje de carga hasta recibir la respuesta
 
             getJSONData(PUBLISH_PRODUCT_URL).then(function(resultObj){
                 let msgToShowHTML = document.getElementById("resultSpan");

@@ -19,24 +19,24 @@ function parseValue(value, type) {
     return value;
 }
 
-// Función para ordenar productos según el criterio
+// Función para ordenar productos según el criterio especificado
 function sortProducts(criteria, array) {
     return array.sort((a, b) => {
         let aValue, bValue;
         if (criteria === ORDER_BY_SOLD_COUNT) {
             aValue = parseValue(a.soldCount, 'soldCount');
             bValue = parseValue(b.soldCount, 'soldCount');
-            return bValue - aValue; // Ordenar descendente
+            return bValue - aValue; // Ordenar descendente por cantidad de ventas
         } else if (criteria === ORDER_BY_PRICE_ASC) {
             aValue = parseValue(a.cost, 'cost');
             bValue = parseValue(b.cost, 'cost');
-            return aValue - bValue; // Ordenar ascendente
+            return aValue - bValue; // Ordenar ascendente por precio
         } else if (criteria === ORDER_BY_PRICE_DESC) {
             aValue = parseValue(a.cost, 'cost');
             bValue = parseValue(b.cost, 'cost');
-            return bValue - aValue; // Ordenar descendente
+            return bValue - aValue; // Ordenar descendente por precio
         }
-        return 0; // Sin cambio en caso de igualdad
+        return 0; // Sin cambio en caso de que el criterio no coincida
     });
 }
 
@@ -46,7 +46,7 @@ function setProductID(id) {
     window.location = "product-info.html";
 }
 
-// Función para mostrar la lista de productos
+// Función para mostrar la lista de productos filtrados y ordenados
 function showProductsList() {
     let htmlContentToAppend = "";
 
@@ -77,7 +77,7 @@ function showProductsList() {
     document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
 
-// Función para ordenar y mostrar categorías
+// Función para ordenar y mostrar productos de una categoría
 function sortAndShowCategories(sortCriteria, categoriesArray) {
     currentSortCriteria = sortCriteria;
 
@@ -117,27 +117,29 @@ function showCatName() {
 
 // Event listeners para ordenar y filtrar productos
 document.addEventListener("DOMContentLoaded", function() {
+     // Inicializar carrito de compras (si existe) y mostrar la cantidad de productos en el carrito
     productosCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];   
-    // Calcular cantidad de productos en el carrito
-     document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
+    
+    document.getElementById("cantidadProductos").innerHTML = productosCarrito.length;
     const categoryId = localStorage.getItem("catID");
     const url = PRODUCTS_URL + categoryId + EXT_TYPE;
-
+    // Obtener los productos desde la API
     getJSONData(url).then(function(resultObj) {
         if (resultObj.status === "ok") {
             currentProductsArray = resultObj.data.products;
             showProductsList();
         }
     });
-
+    // Event listener para ordenar productos por cantidad de ventas
     document.getElementById("sortByCount").addEventListener("click", function() {
         sortAndShowCategories(ORDER_BY_SOLD_COUNT);
     });
 
+    // Event listener para ordenar productos por precio ascendente  
     document.getElementById("sortByPriceAsc").addEventListener("click", function() {
         sortAndShowCategories(ORDER_BY_PRICE_ASC);
     });
-
+    // Event listener para ordenar productos por precio descendente
     document.getElementById("sortByPriceDesc").addEventListener("click", function() {
         sortAndShowCategories(ORDER_BY_PRICE_DESC);
     });

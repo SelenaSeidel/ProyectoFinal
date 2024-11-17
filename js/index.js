@@ -1,5 +1,8 @@
+
+// Función para verificar si el usuario está autenticado
+// Si no lo está, lo redirige a la página de login
 function checkAuthentication() {
-    // Comprobar si el usuario está autenticado
+    
     if (localStorage.getItem('authenticated') !== 'true') {
         window.location.href = 'login.html'; // Redirigir a la página de login si no está autenticado
     }
