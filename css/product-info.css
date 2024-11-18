@@ -1,10 +1,10 @@
-#tituloCat{
+#tituloCat {
     margin-top: 2vh;
     text-align: center;
 }
 
-#Proddesc{
-   margin-top: 10vh;
+#Proddesc {
+    margin-top: 10vh;
     text-align: center;
 }
 
@@ -16,9 +16,51 @@ h3 {
     text-align: center;
 }
 
-/* modo noche */
-body.dark-mode {
-    background-color: #121212;
+/* Modo Nocturno */
+body.night-mode {
+    background-color: #121212; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+}
+
+#toggle-theme {
+    background-color: transparent;
     color: white;
-  }
+    padding: 6px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+#toggle-theme:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode nav.navbar {
+    background-color: #333;
+}
+
+body.dark-mode .nav-link {
+    color: #bbb;
+}
+
+body.dark-mode .nav-link:hover {
+    color: white;
+}
+
+body.dark-mode #toggle-theme {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+    color: #fff;
+}
+
+body.dark-mode .carousel-item {
+    background-color: #222;
+}
+
   

@@ -174,23 +174,30 @@ const toggleButton = document.getElementById('toggle-theme');
 const body = document.body;
 // Función que cambia entre modo noche y día
 
-function toggleTheme() {
-   
-    body.classList.toggle('dark-mode');
-    const isDarkMode = body.classList.contains('dark-mode');
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('toggle-theme');
+  const body = document.body;
 
-    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
-    
-    toggleButton.textContent = isDarkMode ? 'Cambiar a Modo Día' : 'Cambiar a Modo Noche';
-}
+  // Al cargar la página, verificar la preferencia del usuario (si hay algún valor guardado en localStorage)
+  if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('night-mode');  // Si está habilitado el modo nocturno, agregar la clase al body
+      toggleButton.textContent = 'Modo Día';  // Cambiar el texto del botón
+  } else {
+      toggleButton.textContent = 'Modo Nocturno';  // Si no está habilitado el modo nocturno, mantener el texto original
+  }
 
-const darkMode = localStorage.getItem('darkMode');
-
-if (darkMode === 'enabled') {
-    body.classList.add('dark-mode');
-    toggleButton.textContent = 'Cambiar a Modo Día';
-}
-toggleButton.addEventListener('click', toggleTheme);
+  // Cambiar de tema al hacer clic en el botón
+  toggleButton.addEventListener('click', () => {
+      body.classList.toggle('night-mode');  // Alternar la clase night-mode
+      if (body.classList.contains('night-mode')) {
+          localStorage.setItem('darkMode', 'enabled');  // Guardar la preferencia en localStorage
+          toggleButton.textContent = 'Modo Día';  // Cambiar el texto del botón
+      } else {
+          localStorage.setItem('darkMode', 'disabled');  // Guardar la preferencia en localStorage
+          toggleButton.textContent = 'Modo Nocturno';  // Cambiar el texto del botón
+      }
+  });
+});
 
 
 function Comprar() {
