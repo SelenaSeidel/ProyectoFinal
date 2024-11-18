@@ -7,21 +7,21 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
-
+// Muestra el spinner (indicador de carga) en la página
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
-
+// Oculta el spinner (indicador de carga) en la página
 let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
-
+// Maneja el evento de clic en el botón de salir
 let boton = document.getElementById("SalirBtn")
 boton.addEventListener("click", function () {  //al hacer click
     localStorage.setItem('authenticated', 'false');
     window.location.href = 'login.html';
 })
-
+// Función que realiza una solicitud HTTP a la URL proporcionada y devuelve los datos en formato JSON
 let getJSONData = function(url){
     let result = {};
     showSpinner();

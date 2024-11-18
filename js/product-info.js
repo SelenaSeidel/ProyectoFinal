@@ -1,11 +1,13 @@
 function renderProducts(product) {
+  // Función para renderizar los productos en la página
   const productList = document.getElementById("carrousel");
   productList.innerHTML = '';
+  // Mostrar el título de la categoría del producto y su descripción
   const titulo = document.getElementById("tituloCat");
   const desc = document.getElementById("Proddesc");
      
   titulo.innerHTML=`<h3>${product.category}</h3>`
- 
+ // Mostrar las imágenes del producto en el carrusel
   for (const image of product.images){
     const productHTML = `
             <div class="swiper-slide">
@@ -22,7 +24,7 @@ function renderProducts(product) {
   
     productList.innerHTML += productHTML;
   };
-  
+  // Inicialización del Swiper para el carrusel de imágenes
   new Swiper('.swiper-container', {
       effect: 'coverflow',
       slidesPerView: 2,
@@ -48,7 +50,7 @@ function renderProducts(product) {
   });
 
   const relatedProducts = document.querySelector("#related-products .carousel-inner");
- 
+ // Mostrar productos relacionados en el carrusel
   product.relatedProducts.forEach((p, i) => {
     const relatedProductElement = document.createElement("div")
     relatedProductElement.onclick = function(){
@@ -73,7 +75,7 @@ function renderProducts(product) {
   })
 }
 
-/*Parte que agrega comentarios y  */
+// Función para mostrar los comentarios del producto
 function mostrarComentarios(comentarios){
   const tabla=document.getElementById("tablacomentarios")
   tabla.innerHTML = ""
@@ -87,7 +89,7 @@ function mostrarComentarios(comentarios){
     </tr>`
     })
 }
-
+// Función para mostrar las estrellas de puntuación según el valor recibido
 function estrellas(numero){
   var estrellas = "";
   if (numero > 0) {
@@ -102,16 +104,17 @@ function estrellas(numero){
   return estrellas;
 }
 
-// Obtener el nombre de usuario del localStorage
+// Obtener el nombre de usuario del localStorage y mostrarlo en el campo de calificacion
   const username = localStorage.getItem('username');
 
-// Mostrar el nombre de usuario en el campo de calificación
+  
   const userNameDisplay = document.getElementById("userNameDisplay");
   userNameDisplay.value = username ? username : ''; // Asignar el nombre o dejar vacío si no hay
 
 
-/* Desafiate */
+
 const submitComment = document.getElementById("submitComment");
+// Función que se ejecuta al hacer clic en el botón de enviar comentario
 submitComment.addEventListener("click", function(){
   /*Voy a definir que va a hacer el botòn de enviar */
   const comentarioValue = document.getElementById("comentarioValue").value;
@@ -123,7 +126,7 @@ submitComment.addEventListener("click", function(){
   var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
   console.log();
   const nuevoComentario = {product:id, user: userNameDisplay.value,  description: comentarioValue, dateTime:date + ' '+ time, score: rating }
-
+// Obtener los comentarios guardados en localStorage
   const comentarios = JSON.parse(localStorage.getItem("comentarios")) || []
   comentarios.push(nuevoComentario)
 
@@ -169,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 // modo noche - modo dia
 const toggleButton = document.getElementById('toggle-theme');
 const body = document.body;
+// Función que cambia entre modo noche y día
 
 function toggleTheme() {
    

@@ -6,6 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+// Función para ordenar el array de categorías según el criterio seleccionado
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)
@@ -34,12 +35,13 @@ function sortCategories(criteria, array){
 
     return result;
 }
-
+// Función que guarda el ID de la categoría seleccionada en el localStorage
+// y redirige a la página de productos.
 function setCatID(id) {
     localStorage.setItem("catID", id);
     window.location = "products.html"
 }
-
+// Función para mostrar la lista de categorías en la interfaz de usuario
 function showCategoriesList(){
 
     let htmlContentToAppend = "";
